@@ -6,11 +6,10 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <div style="font-size:26px;font-weight: bold; text-align: center;margin-top: 20px; margin-bottom: 20px">
-                        SIMULOR
+                    <div style="text-align:center">
+                        <div style="display: inline-block"><img src="anh/logodoc.png" style="width: 70%;"></div>
                     </div>
-                    <p style="margin-right: 40px; margin-left: 40px; text-align: center; color: gray">Enter your email address and password to access admin panel</p>
-                    <br>
+                    <hr>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -58,7 +57,7 @@
                                     {{ __('ĐĂNG NHẬP') }}
                                 </button>
                             </div>
-                            <div class="col-md-12" style="margin-top: 35px; text-align: center;"> 
+                            <div class="col-md-12" style="margin-top: 35px; text-align: center;">
                                 @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
@@ -68,12 +67,12 @@
                                     Bạn chưa có tài khoản ? <a style="font-weight: bold" href="{{ route('register') }}"> Đăng ký</a>
                                 </div>
                             </div>
-                            </div>
                         </div>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

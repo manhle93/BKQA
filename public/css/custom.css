@@ -1,0 +1,25 @@
+.title {
+    margin-top: 50px;
+    text-align: center
+}
+
+.mini_title {
+    font-family: 'Roboto Slab Bold',serif;
+    font-weight: 700;
+    font-size: 32px
+}
+
+.bar {
+    margin: 0 auto;
+    background: #f2720c;
+    display: block;
+    width: 120px;
+    height: 6px;
+    margin-bottom: 28px;
+    margin-top: 20px
+}
+.intro {
+    font-family: 'Open Sans';
+    font-size: 20px;
+    display: inline-block;
+}

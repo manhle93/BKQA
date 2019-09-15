@@ -1,100 +1,54 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+<div class="banner">
+    <img src="anh/banner.png" width="100%" height="500px">
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="title">
+                <P class="mini_title">CÙNG HỌC TẬP, TRAO ĐỔI KIẾN THỨC</P>
+                <h5 style="font-family: 'Open Sans';">Hệ thống chủ đề đa dạng, Được sự hỗ trợ trực tiếp từ các giảng viên Đại học Bách Khoa Hà Nội</h5>
+                <div class="bar"></div>
+                <div class="intro col-md-8" style="margin-bottom: 20px">
+                    <p>Là một hệ thống mở cho bất cứ ai, chúng tôi giúp bạn trả lời các câu hỏi thuộc nhiều chủ đề với cộng đồng người dùng lớn. Đặc biệt được sự hỗ trợ từ các giảng viên Đại học bách khoa Hà Nội</p>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
+                <div class="card-columns" style="display: inline-block;">
+                    @foreach ($chuDes as $chuDe)
+                    <div class="card">
+                        <img src="..." class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h4 class="card-title" style="font-family: 'Open Sans'; font-weight:bold">{{$chuDe->tieu_de}}</h4>
+                            <p class="card-text">
+                                {{ Str::limit($chuDe->mo_ta, 60) }}
+                            </p>
+                            <p>{{$chuDe->so_cau_hoi}} Câu hỏi</p>
+                        </div>
+                        <a href="#" class="btn btn-success" style="margin-bottom: 20px">Xem chi tiết</a>
+                    </div>
+                    @endforeach
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <div class="col-md-2" style="display: inline-block;">
+                    {{$chuDes->links()}}</div>
+            </div>
+            <div class="title">
+                <P class="mini_title">CÂU HỎI MỚI CẬP NHẬT</P>
+                <div class="bar"></div>
+            </div>
+            <div>
+                @foreach($cauHois as $cauHoi)
+                <h4>{{$cauHoi->tieu_de}}</h4>
+                <p>Tạo bởi: {{$cauHoi->user->name}}<span style="margin-left: 20px"> Chủ đề: {{$cauHoi->chuDe->tieu_de}}</span> <span style="margin-left: 20px"> Thời gian: {{$cauHoi->created_at}}</span></p>
+                <p>{{ Str::limit($cauHoi->noi_dung, 250) }}</p>
+                <hr>
+                @endforeach
+            </div>
+            <div class="col-md-12" style="text-align:center">
+                <button type="button" class="btn btn-primary" >Toàn bộ câu hỏi</button>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection

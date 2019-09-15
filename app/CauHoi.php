@@ -6,5 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 
 class CauHoi extends Model
 {
-    //
+    protected $fillable = [
+        'tieu_de',
+        'noi_dung',
+        'so_cau_tra_loi',
+        'chu_de_id',
+        'cau_tra_loi_tot_nhat_id',
+        'user_id',
+    ];
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+    public function chuDe() {
+        return $this->belongsTo('App\ChuDe');
+    }
+    public function cauTraLois()
+    {
+        return $this->hasMany('App\CauTraLoi');
+    }
+    public function thes()
+    {
+        return $this->belongsToMany('App\The');
+    }
 }
