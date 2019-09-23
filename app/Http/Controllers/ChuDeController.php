@@ -8,19 +8,26 @@ use Illuminate\Http\Request;
 
 class ChuDeController extends Controller
 {
-    public function index(){
-        $chuDes = ChuDe::query()->paginate(3);
-        $cauHois = CauHoi::latest()->with('chuDe', 'user')->paginate(3);
-        return view('welcome', compact(['chuDes', 'cauHois']));
+    public function index()
+    {
+        $chuDes = ChuDe::query()->with('user')->get();
+        return view('welcome', ['chuDes'=>$chuDes ]);
     }
-    public function add(Request $request){
+    // public function index()
+    // {
+    //     $chuDes = ChuDe::query()->with('user')->get();
+    //     $cauHois = CauHoi::query()->with('chuDe', 'user')->orderBy('created_at', 'desc')->get();
+    //     return view('welcome', ['cauHois' => $cauHois, 'chuDes'=>$chuDes ]);
+    // }
+    public function add(Request $request)
+    {
         $data = $request->all();
         $user = auth()->user();
         $data['user_id'] = $user->id;
         $validator = Validator::make($data, [
             'tieu_de' => 'required',
-            'mo_ta'=>'required',
-            'user_id'=>'required'
+            'mo_ta' => 'required',
+            'user_id' => 'required'
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -29,7 +36,7 @@ class ChuDeController extends Controller
                 'data' => [
                     $validator->errors()->all()
                 ]
-            ],400);
+            ], 400);
             try {
                 $chuDe = ChuDe::create($data);
                 return response()->json(
@@ -51,4 +58,11 @@ class ChuDeController extends Controller
             }
         }
     }
+    public function cauHoiThuocChuDe($id)
+    {
+        $chude = ChuDe::where('id', $id)->with('user')->first();
+        $cauHois = CauHoi::query()->where('chu_de_id', $id)->with('chuDe', 'user')->get();
+        return view('cauhoichude', compact(['cauHois', 'chude']));
+    }
+
 }

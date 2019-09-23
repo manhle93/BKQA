@@ -1,5 +1,5 @@
 @extends('layouts.app')
 
 @section('content')
-<trang-chu :chudes="{{$chuDes}}" ></trang-chu>
+<nhap-cauhoi :chudes="{{$chude}}"></nhap-cauhoi>
 @endsection
