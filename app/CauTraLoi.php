@@ -18,4 +18,8 @@ class CauTraLoi extends Model
     public function cauHoi() {
         return $this->belongsTo('App\CauHoi');
     }
+    public function votes()
+    {
+        return $this->hasMany('App\VoteUserCautraloi');
+    }
 }

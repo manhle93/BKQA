@@ -9,7 +9,16 @@
       <div v-else>
         <div class="row">
           <div class="col-md-4">
-            <img :src="taikhoan.anh_dai_dien" style="width: 60px; height:60px;" />
+            <el-badge :value="so_thong_bao" class="item">
+              <el-dropdown trigger="click">
+                <a href="#" @click="docThongBao()">
+                  <img :src="taikhoan.anh_dai_dien" style="width: 60px; height:60px;" />
+                </a>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item icon="el-icon-plus">Câu hỏi đã được duyệt</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </el-badge>
           </div>
           <div class="col-md-8 dropdown">
             <button
@@ -53,7 +62,8 @@
 export default {
   data() {
     return {
-      taikhoan: null
+      taikhoan: null,
+      so_thong_bao: 12
     };
   },
   methods: {
@@ -62,10 +72,11 @@ export default {
         this.taikhoan = res.data.data;
       });
     },
+    docThongBao() {
+      this.so_thong_bao = 5;
+    },
     dangxuat() {
-      axios.post("logout").then(res => {
-        window.location.href = "/";
-      });
+      axios.post("../logout").then(res => {});
       this.flashMessage.success({
         title: "Đăng xuất thành công",
         message: "Thành công",

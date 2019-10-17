@@ -14,6 +14,10 @@ import FlashMessage from '@smartweb/vue-flash-message';
  
 // If you don't need the styles, do not connect
 import 'sweetalert2/dist/sweetalert2.min.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import locale from 'element-ui/lib/locale/lang/vi'
+Vue.use(ElementUI, { locale })
  
 Vue.use(VueSweetalert2);
 Vue.use(FlashMessage);
@@ -42,10 +46,18 @@ Vue.component('tatca-cauhoi', require('./components/TatCaCauHoi.vue').default);
 Vue.component('binh-luan', require('./components/BinhLuan.vue').default);
 Vue.component('cauhoi-chude', require('./components/CauHoiChuDe.vue').default);
 Vue.component('trang-chu', require('./components/TrangChu.vue').default);
+
 Vue.component('tim-kiem', require('./components/TimKiem.vue').default);
+Vue.component('timkiem-nangcao', require('./components/TimKiemNangCao.vue').default);
+
 Vue.component('tai-khoan', require('./components/TaiKhoan.vue').default);
 Vue.component('ca-nhan', require('./components/CaNhan.vue').default);
 Vue.component('ketqua-timkiem', require('./components/KetQuaTimKiem.vue').default);
+Vue.component('thongtin-taikhoan', require('./components/ThongTinTaiKhoan.vue').default);
+Vue.component('Them-Chude', require('./components/ThemChuDe.vue').default);
+Vue.component('Sua-Chude', require('./components/SuaChuDe.vue').default);
+
+
 
 
 /**

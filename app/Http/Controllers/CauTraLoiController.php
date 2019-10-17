@@ -53,4 +53,36 @@ class CauTraLoiController extends Controller
             );
         }
     }
+    public function xoaCauTraLoi($id){
+        $user = auth()->user();
+        $cauTraLoi = CauTraLoi::where('id', $id)->first();
+        $cauHoi = CauHoi::where('id', $cauTraLoi->cau_hoi_id)->first();
+        if($user->id == $cauTraLoi->user_id || $user->id == $cauHoi->user_id) {
+            try {
+                CauTraLoi::find($id)->delete();
+                CauHoi::where('id', $cauTraLoi->cau_hoi_id)->update([
+                    'so_cau_tra_loi' => $cauHoi['so_cau_tra_loi'] - 1
+                ]);
+                return response()->json([
+                    'message' => 'Xóa thành công',
+                    'code' => 200,
+                    'data' => '',
+                ], 200);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Lỗi, không thể xóa câu trả lời này',
+                    'code' => 500,
+                    'data' => $e,
+                ], 500);
+            }
+        }
+    }
+    public function layCauTraLoi($id) {
+        $cauTraLoi = CauTraLoi::where('cau_hoi_id', $id)->with('user', 'votes')->get();
+        return response()->json([
+            'message'=>'Lấy dữ liệu thành công',
+            'code' => 200,
+            'data' => $cauTraLoi
+        ],200);
+    }
 }

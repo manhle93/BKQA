@@ -3,7 +3,7 @@
     <div class="banner">
       <img src="anh/banner.png" width="100%" height="500px" />
     </div>
-    <div class="container">
+    <div class="container" style="font-family: 'Open Sans'">
       <div class="row justify-content-center">
         <div class="col-md-12">
           <div class="title">
@@ -48,7 +48,7 @@
                   <h4>{{cauhoi.tieu_de}}</h4>
                 </a>
                 <p>
-                  Tạo bởi: {{cauhoi.user.name}}
+                  Tạo bởi: <a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a>
                   <span
                     style="margin-left: 20px"
                   >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>

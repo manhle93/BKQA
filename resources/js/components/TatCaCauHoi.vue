@@ -35,11 +35,11 @@
           <img :src="cauhoi.user.anh_dai_dien" style="width: 80px; height:80px" />
         </div>
         <div class="col-md-11" style="font-size: 16px">
-          <a :href="'binhluan/'+ cauhoi.id">
+          <a :href="'./binhluan/'+ cauhoi.id">
             <h4 style="">{{cauhoi.tieu_de}}</h4>
           </a>
           <p>
-            Tạo bởi: {{cauhoi.user.name}}
+            Tạo bởi:<a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a> 
             <span
               style="margin-left: 20px"
             >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
@@ -51,9 +51,6 @@
       </div>
       <p style="margin-top: px; font-size: 18px">{{cauhoi.noi_dung.substr(0, 250)}}...</p>
       <hr />
-    </div>
-    <div>
-      <button>Tải thêm</button>
     </div>
   </div>
 </template>

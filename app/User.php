@@ -44,4 +44,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\CauHoi');
     }
+    public function votes()
+    {
+        return $this->hasMany('App\VoteUserCatraloi');
+    }
+    public function quyen()
+    {
+        return $this->belongsTo('App\Quyen');
+    }
 }

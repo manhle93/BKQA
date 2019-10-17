@@ -11,7 +11,7 @@ class CauHoi extends Model
         'noi_dung',
         'so_cau_tra_loi',
         'chu_de_id',
-        'cau_tra_loi_tot_nhat_id',
+        'trang_thai',
         'user_id',
     ];
     public function user() {
