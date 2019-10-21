@@ -133,7 +133,49 @@
         <div
           v-if="activetab === 3 && (user.quyen_id == 1 || user.quyen_id == 2)"
           class="tabcontent"
-        >Báo cáo vi phạm</div>
+        >
+          <div v-for="bao_cao in bao_cao_vi_pham">
+            <div class="row">
+              <div class="col-md-1">
+                <img :src="bao_cao.user.anh_dai_dien" style="width: 80px; height:80px" />
+              </div>
+              <div class="col-md-9">
+                <p style="font-size: 18px;">
+                  <a :href="`../taikhoan/${bao_cao.user.id}`">{{bao_cao.user.name}}</a> Đã trả lời
+                  <span style="margin-left: 20px">Thời gian: {{bao_cao.created_at}}</span>
+                </p>
+                <p
+                  style="font-size: 20px; font-weight: bold"
+                >{{ bao_cao.noi_dung.substr(0, 200)}}...</p>Báo cáo bởi:
+                <span v-for="nguoibaocao in bao_cao.bao_cao_vi_pham ">
+                  <a :href="`../taikhoan/${nguoibaocao.user.id}`">{{nguoibaocao.user.name}},</a>
+                </span>
+              </div>
+              <div class="col-md-2">
+                <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
+                  <el-button
+                    size="small"
+                    @click="xoaViPham(bao_cao.id)"
+                    type="danger"
+                    icon="el-icon-delete"
+                    circle
+                  ></el-button>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="Bỏ qua" placement="top">
+                  <el-button
+                    v-if="(user.quyen_id == 1 || user.quyen_id == 2)"
+                    size="small"
+                    @click="boQua(bao_cao.id)"
+                    type="success"
+                    icon="el-icon-check"
+                    circle
+                  ></el-button>
+                </el-tooltip>
+              </div>
+            </div>
+            <hr />
+          </div>
+        </div>
         <div v-if="activetab === 4" class="tabcontent">
           <el-button
             icon="el-icon-folder-add"
@@ -191,9 +233,30 @@
                   >{{thanhvien.name}}</a>
                   <p style="font-size: 14px">Email: {{thanhvien.email}}</p>
                   <p style="font-size: 14px">Ngày tham gia: {{formatDate(thanhvien.created_at)}}</p>
-                  <p
-                    style="font-size: 14px"
-                  >Vai trò: {{thanhvien.quyen.ten}} - {{thanhvien.quyen.mo_ta}}</p>
+                  <p style="font-size: 14px">
+                    Vai trò:
+                    <span
+                      v-if="user.quyen_id == 4 || user.quyen_id == 3"
+                    >{{thanhvien.quyen.ten}}</span>
+                    <span v-else>
+                      <el-select
+                        :disabled="(thanhvien.quyen.id == 1 && user.quyen_id !=1) || thanhvien.quyen.id == user.quyen_id "
+                        v-model="thanhvien.quyen.id"
+                        placeholder="Chọn quyền"
+                        style="width: 70%"
+                        size="small"
+                        @change="setQuyen(thanhvien.id, thanhvien.quyen.id)"
+                      >
+                        <el-option
+                          v-for="item in quyens"
+                          :key="item.id"
+                          :label="item.ten"
+                          :value="item.id"
+                          :disabled="item.disabled"
+                        ></el-option>
+                      </el-select>
+                    </span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -211,16 +274,20 @@ export default {
   props: ["user"],
   data() {
     return {
+      chon_quyen: true,
       ChuDe: null,
       showAddForm: false,
       showEditForm: false,
       noi_dung: "",
+      quyens: [],
       activetab: 1,
+      quyen_id: "",
       cauhois: [],
       dsthanhvien: [],
       chudes: [],
       imageUrl: this.user.anh_dai_dien,
-      cau_hoi_cho_duyet: []
+      cau_hoi_cho_duyet: [],
+      bao_cao_vi_pham: []
     };
   },
   created() {
@@ -228,12 +295,71 @@ export default {
     this.getChuDe();
     this.layCauHoi();
     this.getCauHoiChoDuyet();
+    this.getQuyen();
+    this.getCauHoiViPham();
   },
   methods: {
     layCauHoi() {
       axios.get(`cauhoitheotaikhoan/${this.user.id}`).then(res => {
         this.cauhois = res.data.data;
         console.log("cauhoi", this.cauhois);
+      });
+    },
+    async getCauHoiViPham() {
+      let data = await axios.get("baocaovipham");
+      this.bao_cao_vi_pham = data.data.data;
+      console.log(this.bao_cao_vi_pham);
+    },
+    xoaViPham(id) {
+      this.$confirm("Xóa câu trả lời vi phạm?", "Xóa câu trả lời", {
+        confirmButtonText: "Xóa",
+        cancelButtonText: "Hủy",
+        type: "warning"
+      })
+        .then(_ => {
+          axios.delete(`xoacautraloi/${id}`).then(res => {
+            this.$message({
+              message: "Xóa thành công",
+              type: "success"
+            });
+            this.getCauHoiViPham();
+          });
+        })
+        .catch(_ => {});
+    },
+    boQua(id) {
+      this.$confirm("Câu trả lời không vi phạm", "Bỏ qua", {
+        confirmButtonText: "Đồng ý",
+        cancelButtonText: "Hủy",
+        type: "warning"
+      })
+        .then(_ => {
+          axios.delete(`boquavipham/${id}`).then(res => {
+            this.$message({
+              message: "Đã bỏ qua vi phạm",
+              type: "success"
+            });
+            this.getCauHoiViPham();
+          });
+        })
+        .catch(_ => {});
+    },
+    async getQuyen() {
+      let data = await axios.get("getquyen");
+      this.quyens = data.data.data;
+      for (let quyen of this.quyens) {
+        if (this.user.quyen_id == 2 && quyen.id == 1) {
+          quyen.disabled = true;
+        }
+      }
+      console.log(this.quyens);
+    },
+    async setQuyen(id_thanhvien, id_quyen) {
+      await axios.post(`thaydoiquyen/${id_thanhvien}`, { quyen_id: id_quyen });
+      this.$message({
+        title: "Thành công",
+        message: "Đã thay đổi quyền",
+        type: "success"
       });
     },
     getCauHoiChoDuyet() {

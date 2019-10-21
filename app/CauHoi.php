@@ -28,4 +28,8 @@ class CauHoi extends Model
     {
         return $this->belongsToMany('App\The');
     }
+    public function thongBao()
+    {
+        return $this->hasMany('App\ThongBao');
+    }
 }

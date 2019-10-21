@@ -25,7 +25,12 @@
       </div>
       <div class="col-md-2">
         <a href="nhapcauhoi">
-          <button type="button" style="font-size: 18px; font-weight:bold" class="btn btn-outline-danger">ĐẶT CÂU HỎI</button>
+          <button
+          :disabled="user_login == null"
+            type="button"
+            style="font-size: 18px; font-weight:bold"
+            class="btn btn-outline-danger"
+          >ĐẶT CÂU HỎI</button>
         </a>
       </div>
     </div>
@@ -36,15 +41,14 @@
         </div>
         <div class="col-md-11" style="font-size: 16px">
           <a :href="'./binhluan/'+ cauhoi.id">
-            <h4 style="">{{cauhoi.tieu_de}}</h4>
+            <h4 style>{{cauhoi.tieu_de}}</h4>
           </a>
           <p>
-            Tạo bởi:<a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a> 
-            <span
-              style="margin-left: 20px"
-            >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
+            Tạo bởi:
+            <a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a>
+            <span style="margin-left: 20px">Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
             <span style="margin-left: 20px">Thời gian: {{cauhoi.created_at}}</span>
-            <br>
+            <br />
             {{cauhoi.so_cau_tra_loi}} trả lời
           </p>
         </div>
@@ -59,12 +63,20 @@ export default {
   props: ["cauhois", "chudes"],
   data() {
     return {
-      cauhoi: []
+      cauhoi: [],
+      user_login: null
     };
   },
   created() {
-    console.log(this.chudes);
+    this.taiKhoanDangNhap()
   },
-  methods: {}
+  methods: {
+    taiKhoanDangNhap() {
+      axios.get("../kiemtradangnhap").then(res => {
+        this.user_login = res.data.data;
+        console.log(this.user_login);
+      });
+    }
+  }
 };
 </script>

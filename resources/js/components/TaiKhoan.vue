@@ -15,7 +15,18 @@
                   <img :src="taikhoan.anh_dai_dien" style="width: 60px; height:60px;" />
                 </a>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item icon="el-icon-plus">Câu hỏi đã được duyệt</el-dropdown-item>
+                  <div v-for="thongbao in thongbaos">
+                    <el-dropdown-item v-if="thongbao.user_tra_loi_id != null" style="margin-bottom: 5px">
+                      <img :src="thongbao.user_tra_loi.anh_dai_dien" style="width: 50px; height:50px;" />
+                      <a
+                        :href="`/binhluan/${thongbao.cau_hoi_id}`"
+                      >{{thongbao.user_tra_loi.name}} {{thongbao.noi_dung}}</a>
+                    </el-dropdown-item>
+                    <el-dropdown-item v-if="thongbao.user_tra_loi_id == null">
+                      <img src="/storage/images/avatar/pheduyet.jpg" style="width: 50px; height:50px;" />
+                      <a :href="`/binhluan/${thongbao.cau_hoi_id}`">{{thongbao.noi_dung}}</a>
+                    </el-dropdown-item>
+                  </div>
                 </el-dropdown-menu>
               </el-dropdown>
             </el-badge>
@@ -63,7 +74,8 @@ export default {
   data() {
     return {
       taikhoan: null,
-      so_thong_bao: 12
+      so_thong_bao: 0,
+      thongbaos: []
     };
   },
   methods: {
@@ -72,8 +84,14 @@ export default {
         this.taikhoan = res.data.data;
       });
     },
+    async getThongBao() {
+      let data = await axios.get("/thongbao");
+      this.thongbaos = data.data.data;
+      this.so_thong_bao = this.taikhoan.so_thong_bao;
+    },
     docThongBao() {
-      this.so_thong_bao = 5;
+      this.so_thong_bao = 0;
+      axios.post("/docthongbao");
     },
     dangxuat() {
       axios.post("../logout").then(res => {});
@@ -84,7 +102,7 @@ export default {
       });
     },
     dangky() {
-      window.location.href = "register";
+      window.location.href = "/register";
     },
     dangnhap() {
       window.location.href = "../login";
@@ -92,6 +110,11 @@ export default {
   },
   created() {
     this.kiemTraDangNhap();
+    this.getThongBao();
+    setInterval(()=> {
+      this.kiemTraDangNhap();
+      this.getThongBao();
+    }, 4500);
   }
 };
 </script>

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\CauHoi;
+use App\User;
 use App\CauTraLoi;
 use App\ChuDe;
+use App\ThongBao;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -118,8 +120,19 @@ class CauHoiController extends Controller
         $user = auth()->user();
         if ($user->quyen_id == 1 || $user->quyen_id == 2) {
             try {
+                $cauhoi = CauHoi::where('id', $id)->first();
+                $so_thong_bao = User::where('id', $cauhoi->user_id)->first();
                 CauHoi::find($id)->update([
                     'trang_thai' => true
+                ]);
+                User::where('id', $cauhoi->user_id)->update([
+                    'so_thong_bao' => (int) $so_thong_bao->so_thong_bao + 1
+                ]);
+                ThongBao::create([
+                    'user_id'=> $cauhoi->user_id,
+                    'cau_hoi_id' => $id,
+                    'user_tra_loi_id'=> null,
+                    'noi_dung' => 'Câu hỏi của bạn đã được phê duyệt'
                 ]);
                 response()->json([
                     'message' => 'Phê duyệt thành công',
@@ -129,7 +142,8 @@ class CauHoiController extends Controller
             } catch (\Exception $e) {
                 return response()->json(
                     [
-                        'code' => '400',
+                        'data'=> $e,
+                        'code' => 400,
                         'message' => 'Thất bại',
                     ],
                     400

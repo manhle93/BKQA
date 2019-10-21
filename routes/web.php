@@ -58,6 +58,16 @@ Route::get('uservote/{id}', 'VoteController@getUserVote');
 Route::get('cauhoichoduyet', 'CauHoiController@cauHoiChoDuyet');
 Route::post('pheduyetcauhoi/{id}', 'CauHoiController@pheDuyet');
 Route::post('thaydoiquyen/{id}', 'UserController@setQuyen');
+Route::get('getquyen', 'LayoutController@getQuyen');
+Route::get('thongbao', 'LayoutController@getThongBao');
+Route::post('docthongbao', 'UserController@docThongBao');
+Route::get('baocaovipham', 'CauTraLoiController@danhSachBaoCao');
+Route::post('baocaovipham/{id}', 'CauTraLoiController@baoCaoViPham');
+Route::delete('boquavipham/{id}', 'CauTraLoiController@boQuaViPham');
+
+
+
+
 
 
 

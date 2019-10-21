@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <!-- <div class="form-group row">
                             <div class="col-md-12">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -49,7 +49,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
@@ -58,11 +58,11 @@
                                 </button>
                             </div>
                             <div class="col-md-12" style="margin-top: 35px; text-align: center;">
-                                @if (Route::has('password.request'))
+                                <!-- @if (Route::has('password.request'))
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
-                                @endif
+                                @endif -->
                                 <div>
                                     Bạn chưa có tài khoản ? <a style="font-weight: bold" href="{{ route('register') }}"> Đăng ký</a>
                                 </div>

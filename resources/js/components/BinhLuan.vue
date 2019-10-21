@@ -9,7 +9,7 @@
         <div class="col-md-10">
           <p style="font-weight:bold; font-size: 20px">{{cauhoi.tieu_de}}</p>
           <p style="font-size: 18px ;">
-            Tạo bởi: {{cauhoi.user.name}}
+            Tạo bởi: <a :href="`../taikhoan/${cauhoi.user.id}`"> {{cauhoi.user.name}}</a>
             <span
               style="margin-left: 20px"
             >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
@@ -37,6 +37,7 @@
       <textarea rows="3" class="form-control" style="font-size: 20px" v-model="noi_dung"></textarea>
       <br />
       <button
+      :disabled="user_login == null || noi_dung.trim() == ''"
         type="button"
         style="font-family: 'Open Sans'; font-size: 18px"
         @click="binhluan()"
@@ -54,25 +55,50 @@
           </div>
           <div class="col-md-8">
             <p>
-              <span style="font-weight:bold">{{cautraloi.user.name}}</span>
+              <a :href="`../taikhoan/${cautraloi.user.id}`"><span style="font-weight:bold">{{cautraloi.user.name}}</span></a>
               Đã trả lời
               <el-tooltip class="item" effect="dark" content="Số lượt Vote" placement="top">
-              <el-button size="mini" style="font-weight: bold" type="success" icon="el-icon-check" circle >{{cautraloi.votes.length}}</el-button>
+                <el-button
+                  size="mini"
+                  style="font-weight: bold"
+                  type="success"
+                  icon="el-icon-check"
+                  circle
+                >{{cautraloi.votes.length}}</el-button>
               </el-tooltip>
             </p>
             <p>Thời gian: {{cautraloi.created_at}}</p>
           </div>
           <div class="col-md-3">
             <el-tooltip class="item" effect="dark" content="Vote" placement="top">
-              <a @click="vote(cautraloi.id)"><img src="/storage/images/avatar/vote.png"   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)" style="width: 40px; height: 40px"></a>
+              <a @click="vote(cautraloi.id)">
+                <img
+                  src="/storage/images/avatar/vote.png"
+                  v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)"
+                  style="width: 40px; height: 40px"
+                />
+              </a>
               <!-- <el-button type="success" icon="el-icon-check" v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)" @click="vote(cautraloi.id)" circle></el-button> -->
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="Bỏ Vote" placement="top">
-              <a><img src="/storage/images/avatar/unvote.png" v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) != x)" @click="unVote(cautraloi.id)" style="width: 40px; height: 40px"></a>
+              <a>
+                <img
+                  src="/storage/images/avatar/unvote.png"
+                  v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) != x)"
+                  @click="unVote(cautraloi.id)"
+                  style="width: 40px; height: 40px"
+                />
+              </a>
               <!-- <el-button type="danger" icon="el-icon-close" v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) != x)" @click="unVote(cautraloi.id)" circle></el-button> -->
             </el-tooltip>
-            <el-tooltip v-if="user_login !=null"  class="item" effect="dark" content="Báo cáo vi phạm" placement="top">
-              <el-button  type="warning" icon="el-icon-edit" circle></el-button>
+            <el-tooltip
+              v-if="user_login !=null && user_login.id != cautraloi.user.id"
+              class="item"
+              effect="dark"
+              content="Báo cáo vi phạm"
+              placement="top"
+            >
+              <el-button @click="baoCaoViPham(cautraloi.id)" type="warning" icon="el-icon-edit" circle></el-button>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
               <el-button
@@ -101,7 +127,7 @@ export default {
       user_login: "",
       cautralois: [],
       user_votes: [],
-      x: undefined,
+      x: undefined
     };
   },
   created() {
@@ -124,6 +150,13 @@ export default {
           this.so_cau_tra_loi += 1;
           this.getBinhLuan();
         });
+    },
+    async baoCaoViPham(id) {
+      let data = await axios.post(`/baocaovipham/${id}`);
+      this.$message({
+        message: "Đã báo cáo câu trả lời vi phạm",
+        type: "success"
+      });
     },
     getBinhLuan() {
       axios.get(`/cautraloi/${this.cauhoi.id}`).then(res => {
@@ -169,7 +202,7 @@ export default {
     taiKhoanDangNhap() {
       axios.get("../kiemtradangnhap").then(res => {
         this.user_login = res.data.data;
-        console.log(this.user_login)
+        console.log(this.user_login);
       });
     },
     xoaBinhLuan(id) {

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\CauHoi;
 use App\CauTraLoi;
 use App\ChuDe;
+use App\Quyen;
+use App\ThongBao;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -108,5 +110,22 @@ class LayoutController extends Controller
             $user->update(['anh_dai_dien' => '/storage/images/avatar/' . $name]);
             return '/storage/images/avatar/' . $name;
         }
+    }
+    public function getQuyen(){
+        $quyen = Quyen::all();
+        return response()->json([
+            'message'=> 'Toàn bộ quyền',
+            'data'=> $quyen,
+            'code'=>200
+    ],200);
+    }
+    public function getThongBao(){
+        $user = auth()->user();
+        $thongbao = ThongBao::where('user_id', $user->id)->with('cauHoi', 'cauTraLoi', 'user', 'userTraLoi')->orderBy('created_at', 'desc')->get();
+        return response()->json([
+            'message'=>'lấy thông báo thành công',
+            'code' => 200,
+            'data'=> $thongbao
+        ],200);
     }
 }

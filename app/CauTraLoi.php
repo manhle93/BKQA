@@ -22,4 +22,12 @@ class CauTraLoi extends Model
     {
         return $this->hasMany('App\VoteUserCautraloi');
     }
+    public function thongBao()
+    {
+        return $this->hasMany('App\ThongBao');
+    }
+    public function baoCaoViPham()
+    {
+        return $this->hasMany('App\BaoCaoViPham');
+    }
 }

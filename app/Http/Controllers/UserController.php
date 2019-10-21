@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -20,7 +21,7 @@ class UserController extends Controller
     public function setQuyen(Request $request, $id)
     {
         $user = auth()->user();
-        $user_set = User::where('id', $id);
+        $user_set = User::where('id', $id)->first();
         $quyen =  $request->get('quyen_id');
         if ($user->quyen_id == 1) {
             User::where('id', $id)->update([
@@ -63,5 +64,28 @@ class UserController extends Controller
                 'data' => ''
             ], 400);
         }
+    }
+    public function docThongBao()
+    {
+        $user = auth()->user();
+        try {
+            User::where('id', $user->id)->update([
+                'so_thong_bao' => 0
+            ]);
+            return response()->json([
+                'message' => 'Đọc thông báo',
+                'code' => 200,
+                'data'=> ''
+            ],200);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'code' => 400,
+                    'message' => 'Thất bại',
+                    'data'=>$e
+                ],
+                400
+            );
+         }
     }
 }
