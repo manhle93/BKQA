@@ -30,6 +30,11 @@
       @onClose="handleClose()"
       @onEditChude="result => handleEditChude(result)"
     ></Sua-Chude>
+    <Soan-Thu
+      :active="showFormSoanThu"
+      @onClose="handleClose()"
+      @onSoanThu="SoanThu => handleSoanThu(SoanThu)"
+    ></Soan-Thu>
     <hr />
     <div>
       <div class="tabs">
@@ -48,6 +53,11 @@
         >Báo cáo vi phạm</a>
         <a v-on:click="activetab=4" v-bind:class="[ activetab === 4 ? 'active' : '' ]">Chủ đề</a>
         <a v-on:click="activetab=5" v-bind:class="[ activetab === 5 ? 'active' : '' ]">Thành viên</a>
+        <a v-on:click="activetab=6" v-bind:class="[ activetab === 6 ? 'active' : '' ]">Hộp thư</a>
+        <a
+          v-on:click="activetab=7"
+          v-bind:class="[ activetab === 7 ? 'active' : '' ]"
+        >Lịch sử đăng nhập</a>
       </div>
 
       <div class="content">
@@ -134,6 +144,9 @@
           v-if="activetab === 3 && (user.quyen_id == 1 || user.quyen_id == 2)"
           class="tabcontent"
         >
+         <el-tabs v-model="activeName2">
+           <el-tab-pane label="Câu trả lời vi phạm" name="first">
+             <br><h4>Danh sách báo cáo câu trả lời vi phạm</h4><br>
           <div v-for="bao_cao in bao_cao_vi_pham">
             <div class="row">
               <div class="col-md-1">
@@ -147,9 +160,11 @@
                 <p
                   style="font-size: 20px; font-weight: bold"
                 >{{ bao_cao.noi_dung.substr(0, 200)}}...</p>Báo cáo bởi:
-                <span v-for="nguoibaocao in bao_cao.bao_cao_vi_pham ">
+                <div v-for="nguoibaocao in bao_cao.bao_cao_vi_pham ">
                   <a :href="`../taikhoan/${nguoibaocao.user.id}`">{{nguoibaocao.user.name}},</a>
-                </span>
+                  Lý do: {{nguoibaocao.noi_dung}}
+                  <br>
+                </div>
               </div>
               <div class="col-md-2">
                 <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
@@ -165,7 +180,7 @@
                   <el-button
                     v-if="(user.quyen_id == 1 || user.quyen_id == 2)"
                     size="small"
-                    @click="boQua(bao_cao.id)"
+                    @click="boQuaCauTraLoi(bao_cao.id)"
                     type="success"
                     icon="el-icon-check"
                     circle
@@ -175,6 +190,60 @@
             </div>
             <hr />
           </div>
+          </el-tab-pane>
+          <el-tab-pane label="Câu hỏi vi phạm" name="second">
+            <br><h4>Danh sách báo cáo câu hỏi vi phạm</h4><br>
+            <div v-for="cauhoi in cau_hoi_vi_pham">
+            <div class="row">
+              <div class="col-md-1">
+                <img :src="cauhoi.user.anh_dai_dien" style="width: 80px; height:80px" />
+              </div>
+              <div class="col-md-9">
+                <a :href="`../binhluan/${cauhoi.id}`">
+                  <h4>{{cauhoi.tieu_de}}</h4>
+                </a>
+                <p style="font-size: 16px">
+                  Tạo bởi:
+                  {{user.name}}
+                  <span
+                    style="margin-left: 20px"
+                  >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
+                  <span style="margin-left: 20px">Thời gian: {{cauhoi.created_at}}</span>
+                </p>
+                <p style="font-size: 18px">{{ cauhoi.noi_dung.substr(0, 200)}}...</p>
+                Báo cáo bởi:
+                <div v-for="nguoibaocao in cauhoi.bao_cao_vi_pham ">
+                  <a :href="`../taikhoan/${nguoibaocao.user.id}`">{{nguoibaocao.user.name}},</a>
+                  Lý do: {{nguoibaocao.noi_dung}}
+                  <br>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
+                  <el-button
+                    size="small"
+                    @click="xoaCauHoi(cauhoi.id)"
+                    type="danger"
+                    icon="el-icon-delete"
+                    circle
+                  ></el-button>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="Bỏ qua" placement="top">
+                  <el-button
+                    v-if="(user.quyen_id == 1 || user.quyen_id == 2)"
+                    size="small"
+                    @click="boQuaCauHoi(cauhoi.id)"
+                    type="success"
+                    icon="el-icon-check"
+                    circle
+                  ></el-button>
+                </el-tooltip>
+              </div>
+            </div>
+            <hr />
+          </div>
+            </el-tab-pane>
+          </el-tabs>
         </div>
         <div v-if="activetab === 4" class="tabcontent">
           <el-button
@@ -262,6 +331,96 @@
             </div>
           </div>
         </div>
+        <div v-if="activetab === 6" class="tabcontent">
+          <el-button type="primary" style="margin-bottom: 15px" @click="soanThu()">Soạn thư</el-button>
+          <el-tabs v-model="activeName">
+            <el-tab-pane label="Hộp thư đến" name="first">
+              <div v-for="(thuden, index ) in thu_den">
+                <div class="row">
+                  <div class="col-md-1">
+                    <img :src="thuden.user_gui.anh_dai_dien" style="width: 80px; height:80px; border-radius: 50%; border: 1px solid black" />
+                  </div>
+                  <div class="col-md-10">
+                    <div>
+                      <div style="font-size: 18px; font-style: italic; margin-bottom: 5px">
+                        Gửi từ:
+                        <span
+                          style="font-weight: bold;font-style: normal;"
+                        >{{thuden.user_nhan.name}}</span>
+                      </div>
+                      <div>{{formatDate(thuden.created_at)}}</div>
+                    </div>
+                    <div>
+                      <el-collapse v-model="activeNames">
+                        <el-collapse-item :name="index">
+                          <template slot="title">
+                              <el-button type="primary" icon="el-icon-view" style="margin-right: 5px" circle size="mini"></el-button>
+                            <span style="font-size: 16px;">Xem nội dung</span>
+                          </template>
+                          <p style="font-size: 20px; margin-top: 10px">{{ thuden.noi_dung}}</p>
+                        </el-collapse-item>
+                      </el-collapse>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-1">
+                    <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
+                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </el-tooltip>
+                  </div> -->
+                </div>
+                <hr />
+              </div>
+            </el-tab-pane>
+            <el-tab-pane label="Thư đã gửi" name="second">
+              <div v-for="(thu, index) in thu_da_gui">
+                <div class="row">
+                  <div class="col-md-1">
+                    <img :src="thu.user_nhan.anh_dai_dien" style="width: 80px; height:80px; border-radius: 50%; border: 1px solid black" />
+                  </div>
+                  <div class="col-md-10" style="margin-left: 5px">
+                    <div>
+                      <div style="font-size: 18px; font-style: italic; margin-bottom: 5px">
+                        Gửi đến:
+                        <span style="font-weight: bold;font-style: normal;">{{thu.user_nhan.name}}</span>
+                      </div>
+                      <div>{{formatDate(thu.created_at)}}</div>
+                    </div>
+                    <div>
+                      <el-collapse v-model="activeNames">
+                        <el-collapse-item :name="index">
+                          <template slot="title">
+                            <i class="el-icon-view" style="font-size: 16px; margin-right: 5px"></i>
+                            <span style="font-size: 16px;">Xem nội dung</span>
+                          </template>
+                          <p style="font-size: 20px; margin-top: 10px">{{ thu.noi_dung}}</p>
+                        </el-collapse-item>
+                      </el-collapse>
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-1">
+                    <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
+                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </el-tooltip>
+                  </div>-->
+                </div>
+                <hr />
+              </div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+        <div v-if="activetab === 7" class="tabcontent">
+          <h4>Lịch sử đăng nhập</h4>
+          <br />
+          <el-table :data="lich_su" border style="width: 100%">
+            <el-table-column label="STT" width="90" align="center">
+              <template slot-scope="scope">{{ scope.$index +1 }}</template>
+            </el-table-column>
+            <el-table-column label="Thời gian" width="180">
+              <template slot-scope="scope">{{ formatTimeLogIn(scope.row.created_at)}}</template>
+            </el-table-column>
+            <el-table-column prop="noi_dung" label="Chi tiết"></el-table-column>
+          </el-table>
+        </div>
       </div>
     </div>
   </div>
@@ -269,13 +428,18 @@
 <script>
 import ThemChude from "./ThemChuDe";
 import SuaChude from "./SuaChuDe";
+import SoanThu from "./SoanThu";
 
 export default {
   props: ["user"],
   data() {
     return {
+      activeName: "first",
+      activeName2: "first",
       chon_quyen: true,
       ChuDe: null,
+      SoanThu: null,
+      showFormSoanThu: false,
       showAddForm: false,
       showEditForm: false,
       noi_dung: "",
@@ -287,7 +451,12 @@ export default {
       chudes: [],
       imageUrl: this.user.anh_dai_dien,
       cau_hoi_cho_duyet: [],
-      bao_cao_vi_pham: []
+      bao_cao_vi_pham: [],
+      lich_su: [],
+      thu_da_gui: [],
+      thu_den: [],
+      activeNames: [],
+      cau_hoi_vi_pham: []
     };
   },
   created() {
@@ -296,19 +465,21 @@ export default {
     this.layCauHoi();
     this.getCauHoiChoDuyet();
     this.getQuyen();
-    this.getCauHoiViPham();
+    this.getViPham();
+    this.getLichSu();
+    this.getThu();
   },
   methods: {
     layCauHoi() {
       axios.get(`cauhoitheotaikhoan/${this.user.id}`).then(res => {
         this.cauhois = res.data.data;
-        console.log("cauhoi", this.cauhois);
       });
     },
-    async getCauHoiViPham() {
+    async getViPham() {
       let data = await axios.get("baocaovipham");
-      this.bao_cao_vi_pham = data.data.data;
-      console.log(this.bao_cao_vi_pham);
+      this.bao_cao_vi_pham = data.data.cautraloi;
+      this.cau_hoi_vi_pham = data.data.cauhoi
+      console.log('cau_hoi_vi_pham',this.cau_hoi_vi_pham);
     },
     xoaViPham(id) {
       this.$confirm("Xóa câu trả lời vi phạm?", "Xóa câu trả lời", {
@@ -322,24 +493,41 @@ export default {
               message: "Xóa thành công",
               type: "success"
             });
-            this.getCauHoiViPham();
+            this.getViPham();
           });
         })
         .catch(_ => {});
     },
-    boQua(id) {
-      this.$confirm("Câu trả lời không vi phạm", "Bỏ qua", {
+    boQuaCauTraLoi(id) {
+      this.$confirm("Nội dung không vi phạm", "Bỏ qua", {
         confirmButtonText: "Đồng ý",
         cancelButtonText: "Hủy",
         type: "warning"
       })
         .then(_ => {
-          axios.delete(`boquavipham/${id}`).then(res => {
+          axios.delete(`boquacautraloivipham/${id}`).then(res => {
             this.$message({
               message: "Đã bỏ qua vi phạm",
               type: "success"
             });
-            this.getCauHoiViPham();
+            this.getViPham();
+          });
+        })
+        .catch(_ => {});
+    },
+    boQuaCauHoi(id) {
+      this.$confirm("Nội dung không vi phạm", "Bỏ qua", {
+        confirmButtonText: "Đồng ý",
+        cancelButtonText: "Hủy",
+        type: "warning"
+      })
+        .then(_ => {
+          axios.delete(`boquacauhoivipham/${id}`).then(res => {
+            this.$message({
+              message: "Đã bỏ qua vi phạm",
+              type: "success"
+            });
+            this.getViPham();
           });
         })
         .catch(_ => {});
@@ -352,7 +540,6 @@ export default {
           quyen.disabled = true;
         }
       }
-      console.log(this.quyens);
     },
     async setQuyen(id_thanhvien, id_quyen) {
       await axios.post(`thaydoiquyen/${id_thanhvien}`, { quyen_id: id_quyen });
@@ -361,6 +548,10 @@ export default {
         message: "Đã thay đổi quyền",
         type: "success"
       });
+    },
+    async getLichSu() {
+      let data = await axios.get("/lichsu");
+      this.lich_su = data.data.data;
     },
     getCauHoiChoDuyet() {
       axios.get("cauhoichoduyet").then(res => {
@@ -372,6 +563,9 @@ export default {
     },
     themChuDe() {
       this.showAddForm = true;
+    },
+    soanThu() {
+      this.showFormSoanThu = true;
     },
     suaChuDe(ChuDe) {
       this.showEditForm = true;
@@ -411,36 +605,49 @@ export default {
         })
         .then(res => {
           this.imageUrl = res.data;
-          console.log(this.imageUrl);
           location.reload();
         })
         .catch(err => {});
     },
+    handleSoanThu(result) {
+      if (result === true) {
+        this.handleClose();
+        this.$message({
+          title: "Thành công",
+          message: "Gửi thư thành công",
+          type: "success"
+        });
+        // this.getChuDe();
+      }
+    },
     getThanhVien() {
       axios.get("dsthanhvien").then(res => {
         this.dsthanhvien = res.data.data;
-        console.log(this.dsthanhvien);
       });
     },
     getChuDe() {
       axios.get("getchude").then(res => {
         this.chudes = res.data.data;
-        console.log(this.chudes);
       });
     },
-    formatDate(date) {
-      let current_datetime = new Date(date);
-      let formatted_date =
-        current_datetime.getDate() +
+    formatDate(d) {
+      var a = new Date(d);
+      return (
+        this.addZero(a.getHours()) +
+        ":" +
+        this.addZero(a.getMinutes()) +
+        ", Ngày " +
+        this.addZero(a.getDate()) +
         "/" +
-        (current_datetime.getMonth() + 1) +
+        this.addZero(a.getMonth() + 1) +
         "/" +
-        current_datetime.getFullYear();
-      return formatted_date;
+        a.getUTCFullYear()
+      );
     },
     handleClose() {
       this.showAddForm = false;
       this.showEditForm = false;
+      this.showFormSoanThu = false;
       this.$emit("onRefresh");
     },
     xoaCauHoi(id) {
@@ -489,6 +696,31 @@ export default {
           });
         })
         .catch(_ => {});
+    },
+    addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    },
+    formatTimeLogIn(d) {
+      var a = new Date(d);
+      return (
+        this.addZero(a.getDate()) +
+        "/" +
+        this.addZero(a.getMonth() + 1) +
+        "/" +
+        a.getFullYear() +
+        ", " +
+        this.addZero(a.getHours()) +
+        ":" +
+        this.addZero(a.getMinutes())
+      );
+    },
+    async getThu() {
+      let data = await axios.get("/getthu");
+      this.thu_da_gui = data.data.thugui;
+      this.thu_den = data.data.thuden;
     }
   }
 };

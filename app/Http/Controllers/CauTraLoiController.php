@@ -74,7 +74,7 @@ class CauTraLoiController extends Controller
         $user = auth()->user();
         $cauTraLoi = CauTraLoi::where('id', $id)->first();
         $cauHoi = CauHoi::where('id', $cauTraLoi->cau_hoi_id)->first();
-        if ($user->id == $cauTraLoi->user_id || $user->id == $cauHoi->user_id) {
+        if ($user->id == $cauTraLoi->user_id || $user->id == $cauHoi->user_id || $user->quyen_id == 1 ||$user->quyen_id == 2 ) {
             try {
                 CauTraLoi::find($id)->delete();
                 CauHoi::where('id', $cauTraLoi->cau_hoi_id)->update([
@@ -103,19 +103,23 @@ class CauTraLoiController extends Controller
             'data' => $cauTraLoi
         ], 200);
     }
-    public function baoCaoViPham($id)
+    public function baoCaoViPham(Request $request)
     {
+        $data = $request->all();
         $user = auth()->user();
         try {
-            $daBaoCao = BaoCaoViPham::where('user_id', $user->id)->where('cau_tra_loi_id', $id)->count();
-            if($daBaoCao == 0) {
+            $daBaoCaoCauTraLoi = BaoCaoViPham::where('user_id', $user->id)->where('cau_tra_loi_id', $data['cau_tra_loi_id'],)->count();
+            $daBaoCaoCauHoi = BaoCaoViPham::where('user_id', $user->id)->where('cau_hoi_bao_cao_id', $data['cau_hoi_bao_cao_id'])->count();
+            if(($data['cau_tra_loi_id'] != null && $daBaoCaoCauTraLoi == 0) || ($data['cau_hoi_bao_cao_id'] != null && $daBaoCaoCauHoi == 0) ) {
                 BaoCaoViPham::create([
                     'user_id' => $user->id,
-                    'cau_tra_loi_id' => $id
+                    'cau_tra_loi_id' => $data['cau_tra_loi_id'],
+                    'cau_hoi_bao_cao_id' => $data['cau_hoi_bao_cao_id'],
+                    'noi_dung'=> $data['noi_dung']
                 ]);
             }
             return response()->json([
-                'message' => 'Đã báo cáo câu trả lời',
+                'message' => 'Đã báo cáo vi phạm',
                 'code' => 200,
                 'data' => ''
             ], 200);
@@ -130,18 +134,36 @@ class CauTraLoiController extends Controller
     public function danhSachBaoCao()
     {
         $cauTraLoi = CauTraLoi::has('baoCaoViPham')->with('user','baoCaoViPham', 'baoCaoViPham.user')->get();
+        $cauHoi = CauHoi::has('baoCaoViPham')->with('user','chuDe','baoCaoViPham', 'baoCaoViPham.user')->get();
         return response()->json([
             'message' => 'Lấy dữ liệu thành công',
             'code' => 200,
-            'data' => $cauTraLoi
+            'cautraloi' => $cauTraLoi,
+            'cauhoi' => $cauHoi
         ]);
     }
-    public function boQuaViPham($id)
+    public function boQuaCauTraLoiViPham($id)
     {
         try {
             BaoCaoViPham::where('cau_tra_loi_id', $id)->delete();
             return response()->json([
                 'message' => 'Câu trả lời không vi phạm',
+                'code' => 200,
+                'data' => ''
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Có Lỗi xảy ra',
+                'code' => 500,
+                'data' => $e
+            ], 500);
+        }
+    }
+    public function boQuaCauHoiViPham($id){
+        try {
+            BaoCaoViPham::where('cau_hoi_bao_cao_id', $id)->delete();
+            return response()->json([
+                'message' => 'Câu hỏi không vi phạm',
                 'code' => 200,
                 'data' => ''
             ], 200);

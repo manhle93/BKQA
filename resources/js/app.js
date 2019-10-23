@@ -56,6 +56,9 @@ Vue.component('ketqua-timkiem', require('./components/KetQuaTimKiem.vue').defaul
 Vue.component('thongtin-taikhoan', require('./components/ThongTinTaiKhoan.vue').default);
 Vue.component('Them-Chude', require('./components/ThemChuDe.vue').default);
 Vue.component('Sua-Chude', require('./components/SuaChuDe.vue').default);
+Vue.component('Soan-Thu', require('./components/SoanThu.vue').default);
+Vue.component('Bao-Cao', require('./components/BaoCao.vue').default);
+
 
 
 

@@ -62,8 +62,16 @@ Route::get('getquyen', 'LayoutController@getQuyen');
 Route::get('thongbao', 'LayoutController@getThongBao');
 Route::post('docthongbao', 'UserController@docThongBao');
 Route::get('baocaovipham', 'CauTraLoiController@danhSachBaoCao');
-Route::post('baocaovipham/{id}', 'CauTraLoiController@baoCaoViPham');
-Route::delete('boquavipham/{id}', 'CauTraLoiController@boQuaViPham');
+Route::post('baocaovipham', 'CauTraLoiController@baoCaoViPham');
+Route::delete('boquacautraloivipham/{id}', 'CauTraLoiController@boQuaCauTraLoiViPham');
+Route::delete('boquacauhoivipham/{id}', 'CauTraLoiController@boQuaCauHoiViPham');
+Route::get('lichsu', 'LayoutController@getLichSuHoatDong');
+Route::post('guithu', 'LayoutController@guiThu');
+Route::get('getthu', 'LayoutController@getThu');
+
+
+
+
 
 
 

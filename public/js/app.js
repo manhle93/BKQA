@@ -3480,103 +3480,15 @@ function mergeFn (a, b) {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BinhLuan.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BinhLuan.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BaoCao.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BaoCao.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3617,11 +3529,229 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "BaoCao",
+  data: function data() {
+    return {
+      loading: false,
+      labelPosition: "top",
+      showFormBaoCao: false,
+      formLabelAlign: {
+        cau_tra_loi_id: '',
+        noi_dung: "",
+        cau_hoi_bao_cao_id: ''
+      },
+      rules: {
+        noi_dung: [{
+          required: true,
+          message: "Nội dung mô tả không được bỏ trống",
+          trigger: "blur"
+        }]
+      }
+    };
+  },
+  props: {
+    active: {
+      type: Boolean,
+      "default": false
+    },
+    CauTraLoi: {
+      type: Number
+    },
+    CauHoi: {
+      type: Number
+    }
+  },
+  watch: {
+    active: function active(val) {
+      this.showFormBaoCao = val;
+    },
+    CauHoi: function CauHoi(val) {
+      this.formLabelAlign.cau_hoi_bao_cao_id = val;
+    },
+    CauTraLoi: function CauTraLoi(val) {
+      this.formLabelAlign.cau_tra_loi_id = val;
+    }
+  },
+  methods: {
+    close: function close() {
+      this.$emit("onClose");
+    },
+    submit: function submit(create) {
+      var _this = this;
+
+      this.$refs[create].validate(function (valid) {
+        if (valid) {
+          _this.loading = true;
+          axios.post("/baocaovipham", _this.formLabelAlign).then(function (res) {
+            _this.loading = false;
+
+            _this.close();
+
+            _this.formLabelAlign.noi_dung = null;
+
+            _this.$message({
+              message: "Đã báo cáo vi phạm",
+              type: "success"
+            });
+          });
+        } else {
+          return false;
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BinhLuan.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BinhLuan.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BaoCao__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaoCao */ "./resources/js/components/BaoCao.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
   props: ["cauhoi"],
   data: function data() {
     return {
+      showFormBaoCao: false,
       so_cau_tra_loi: 0,
       noi_dung: "",
+      CauTraLoi: null,
+      CauHoi: null,
       user_login: "",
       cautralois: [],
       user_votes: [],
@@ -3652,39 +3782,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _this.getBinhLuan();
       });
     },
-    baoCaoViPham: function () {
-      var _baoCaoViPham = _asyncToGenerator(
-      /*#__PURE__*/
-      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(id) {
-        var data;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return axios.post("/baocaovipham/".concat(id));
-
-              case 2:
-                data = _context.sent;
-                this.$message({
-                  message: "Đã báo cáo câu trả lời vi phạm",
-                  type: "success"
-                });
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function baoCaoViPham(_x) {
-        return _baoCaoViPham.apply(this, arguments);
-      }
-
-      return baoCaoViPham;
-    }(),
+    handleClose: function handleClose() {
+      this.showFormBaoCao = false;
+      this.$emit("onRefresh");
+    },
+    baoCaoCauHoi: function baoCaoCauHoi(id) {
+      this.showFormBaoCao = true;
+      this.CauTraLoi = null;
+      this.CauHoi = id;
+    },
+    baoCaoCauTraLoi: function baoCaoCauTraLoi(id) {
+      this.showFormBaoCao = true;
+      this.CauTraLoi = id;
+      this.CauHoi = null;
+    },
     getBinhLuan: function getBinhLuan() {
       var _this2 = this;
 
@@ -3785,6 +3896,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ThemChuDe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ThemChuDe */ "./resources/js/components/ThemChuDe.vue");
 /* harmony import */ var _SuaChuDe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SuaChuDe */ "./resources/js/components/SuaChuDe.vue");
+/* harmony import */ var _SoanThu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SoanThu */ "./resources/js/components/SoanThu.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -4059,14 +4171,178 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["user"],
   data: function data() {
     return {
+      activeName: "first",
+      activeName2: "first",
       chon_quyen: true,
       ChuDe: null,
+      SoanThu: null,
+      showFormSoanThu: false,
       showAddForm: false,
       showEditForm: false,
       noi_dung: "",
@@ -4078,7 +4354,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       chudes: [],
       imageUrl: this.user.anh_dai_dien,
       cau_hoi_cho_duyet: [],
-      bao_cao_vi_pham: []
+      bao_cao_vi_pham: [],
+      lich_su: [],
+      thu_da_gui: [],
+      thu_den: [],
+      activeNames: [],
+      cau_hoi_vi_pham: []
     };
   },
   created: function created() {
@@ -4087,7 +4368,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     this.layCauHoi();
     this.getCauHoiChoDuyet();
     this.getQuyen();
-    this.getCauHoiViPham();
+    this.getViPham();
+    this.getLichSu();
+    this.getThu();
   },
   methods: {
     layCauHoi: function layCauHoi() {
@@ -4095,11 +4378,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       axios.get("cauhoitheotaikhoan/".concat(this.user.id)).then(function (res) {
         _this.cauhois = res.data.data;
-        console.log("cauhoi", _this.cauhois);
       });
     },
-    getCauHoiViPham: function () {
-      var _getCauHoiViPham = _asyncToGenerator(
+    getViPham: function () {
+      var _getViPham = _asyncToGenerator(
       /*#__PURE__*/
       _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var data;
@@ -4112,10 +4394,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 2:
                 data = _context.sent;
-                this.bao_cao_vi_pham = data.data.data;
-                console.log(this.bao_cao_vi_pham);
+                this.bao_cao_vi_pham = data.data.cautraloi;
+                this.cau_hoi_vi_pham = data.data.cauhoi;
+                console.log('cau_hoi_vi_pham', this.cau_hoi_vi_pham);
 
-              case 5:
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -4123,11 +4406,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee, this);
       }));
 
-      function getCauHoiViPham() {
-        return _getCauHoiViPham.apply(this, arguments);
+      function getViPham() {
+        return _getViPham.apply(this, arguments);
       }
 
-      return getCauHoiViPham;
+      return getViPham;
     }(),
     xoaViPham: function xoaViPham(id) {
       var _this2 = this;
@@ -4143,25 +4426,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             type: "success"
           });
 
-          _this2.getCauHoiViPham();
+          _this2.getViPham();
         });
       })["catch"](function (_) {});
     },
-    boQua: function boQua(id) {
+    boQuaCauTraLoi: function boQuaCauTraLoi(id) {
       var _this3 = this;
 
-      this.$confirm("Câu trả lời không vi phạm", "Bỏ qua", {
+      this.$confirm("Nội dung không vi phạm", "Bỏ qua", {
         confirmButtonText: "Đồng ý",
         cancelButtonText: "Hủy",
         type: "warning"
       }).then(function (_) {
-        axios["delete"]("boquavipham/".concat(id)).then(function (res) {
+        axios["delete"]("boquacautraloivipham/".concat(id)).then(function (res) {
           _this3.$message({
             message: "Đã bỏ qua vi phạm",
             type: "success"
           });
 
-          _this3.getCauHoiViPham();
+          _this3.getViPham();
+        });
+      })["catch"](function (_) {});
+    },
+    boQuaCauHoi: function boQuaCauHoi(id) {
+      var _this4 = this;
+
+      this.$confirm("Nội dung không vi phạm", "Bỏ qua", {
+        confirmButtonText: "Đồng ý",
+        cancelButtonText: "Hủy",
+        type: "warning"
+      }).then(function (_) {
+        axios["delete"]("boquacauhoivipham/".concat(id)).then(function (res) {
+          _this4.$message({
+            message: "Đã bỏ qua vi phạm",
+            type: "success"
+          });
+
+          _this4.getViPham();
         });
       })["catch"](function (_) {});
     },
@@ -4228,9 +4529,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.finish(15);
 
               case 23:
-                console.log(this.quyens);
-
-              case 24:
               case "end":
                 return _context2.stop();
             }
@@ -4278,11 +4576,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       return setQuyen;
     }(),
+    getLichSu: function () {
+      var _getLichSu = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.next = 2;
+                return axios.get("/lichsu");
+
+              case 2:
+                data = _context4.sent;
+                this.lich_su = data.data.data;
+
+              case 4:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+
+      function getLichSu() {
+        return _getLichSu.apply(this, arguments);
+      }
+
+      return getLichSu;
+    }(),
     getCauHoiChoDuyet: function getCauHoiChoDuyet() {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.get("cauhoichoduyet").then(function (res) {
-        _this4.cau_hoi_cho_duyet = res.data.data;
+        _this5.cau_hoi_cho_duyet = res.data.data;
       });
     },
     handleUpload: function handleUpload() {
@@ -4290,6 +4618,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     themChuDe: function themChuDe() {
       this.showAddForm = true;
+    },
+    soanThu: function soanThu() {
+      this.showFormSoanThu = true;
     },
     suaChuDe: function suaChuDe(ChuDe) {
       this.showEditForm = true;
@@ -4318,7 +4649,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     },
     handleChange: function handleChange(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       var files = e.target.files;
       var data = new FormData();
@@ -4328,39 +4659,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           "Content-Type": "multipart/form-data"
         }
       }).then(function (res) {
-        _this5.imageUrl = res.data;
-        console.log(_this5.imageUrl);
+        _this6.imageUrl = res.data;
         location.reload();
       })["catch"](function (err) {});
     },
+    handleSoanThu: function handleSoanThu(result) {
+      if (result === true) {
+        this.handleClose();
+        this.$message({
+          title: "Thành công",
+          message: "Gửi thư thành công",
+          type: "success"
+        }); // this.getChuDe();
+      }
+    },
     getThanhVien: function getThanhVien() {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get("dsthanhvien").then(function (res) {
-        _this6.dsthanhvien = res.data.data;
-        console.log(_this6.dsthanhvien);
+        _this7.dsthanhvien = res.data.data;
       });
     },
     getChuDe: function getChuDe() {
-      var _this7 = this;
+      var _this8 = this;
 
       axios.get("getchude").then(function (res) {
-        _this7.chudes = res.data.data;
-        console.log(_this7.chudes);
+        _this8.chudes = res.data.data;
       });
     },
-    formatDate: function formatDate(date) {
-      var current_datetime = new Date(date);
-      var formatted_date = current_datetime.getDate() + "/" + (current_datetime.getMonth() + 1) + "/" + current_datetime.getFullYear();
-      return formatted_date;
+    formatDate: function formatDate(d) {
+      var a = new Date(d);
+      return this.addZero(a.getHours()) + ":" + this.addZero(a.getMinutes()) + ", Ngày " + this.addZero(a.getDate()) + "/" + this.addZero(a.getMonth() + 1) + "/" + a.getUTCFullYear();
     },
     handleClose: function handleClose() {
       this.showAddForm = false;
       this.showEditForm = false;
+      this.showFormSoanThu = false;
       this.$emit("onRefresh");
     },
     xoaCauHoi: function xoaCauHoi(id) {
-      var _this8 = this;
+      var _this9 = this;
 
       this.$confirm("Bạn có chắc chắn muốn xóa câu hỏi này?", "Xóa câu hỏi", {
         confirmButtonText: "Xóa",
@@ -4368,22 +4706,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         type: "warning"
       }).then(function (_) {
         axios["delete"]("/xoacauhoi/".concat(id)).then(function (res) {
-          _this8.$message({
+          _this9.$message({
             message: "Đã xóa câu hỏi",
             type: "success"
           });
 
-          _this8.layCauHoi();
+          _this9.layCauHoi();
 
-          _this8.getCauHoiChoDuyet();
+          _this9.getCauHoiChoDuyet();
         });
       });
     },
     pheDuyet: function pheDuyet(id) {
-      var _this9 = this;
+      var _this10 = this;
 
       axios.post("pheduyetcauhoi/".concat(id)).then(function (res) {
-        _this9.$message({
+        _this10.$message({
           message: "Đã phê duyệt câu hỏi",
           type: "success"
         });
@@ -4392,7 +4730,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.layCauHoi();
     },
     xoaChuDe: function xoaChuDe(id) {
-      var _this10 = this;
+      var _this11 = this;
 
       this.$confirm("Xóa chủ đề cùng toàn bộ câu hỏi trong chủ đề?", "Xóa chủ đề", {
         confirmButtonText: "Xóa",
@@ -4400,15 +4738,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         type: "warning"
       }).then(function (_) {
         axios["delete"]("xoachude/".concat(id)).then(function (res) {
-          _this10.$message({
+          _this11.$message({
             message: "Xóa thành công",
             type: "success"
           });
 
-          _this10.getChuDe();
+          _this11.getChuDe();
         });
       })["catch"](function (_) {});
-    }
+    },
+    addZero: function addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+
+      return i;
+    },
+    formatTimeLogIn: function formatTimeLogIn(d) {
+      var a = new Date(d);
+      return this.addZero(a.getDate()) + "/" + this.addZero(a.getMonth() + 1) + "/" + a.getFullYear() + ", " + this.addZero(a.getHours()) + ":" + this.addZero(a.getMinutes());
+    },
+    getThu: function () {
+      var _getThu = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.next = 2;
+                return axios.get("/getthu");
+
+              case 2:
+                data = _context5.sent;
+                this.thu_da_gui = data.data.thugui;
+                this.thu_den = data.data.thuden;
+
+              case 5:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+
+      function getThu() {
+        return _getThu.apply(this, arguments);
+      }
+
+      return getThu;
+    }()
   }
 });
 
@@ -4678,6 +5058,164 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SoanThu.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SoanThu.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-multiselect */ "./node_modules/vue-multiselect/dist/vue-multiselect.min.js");
+/* harmony import */ var vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_multiselect__WEBPACK_IMPORTED_MODULE_0__);
+var _name$components$prop;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = (_name$components$prop = {
+  name: "SoanThu",
+  components: {
+    Multiselect: vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
+  props: ["thanhvien"],
+  data: function data() {
+    return {
+      loading: false,
+      labelPosition: "top",
+      showSoanThu: false,
+      formLabelAlign: {
+        user_nhan_id: "",
+        noi_dung: ""
+      },
+      nguoinhans: [],
+      rules: {
+        user_nhan_id: [{
+          required: true,
+          message: "Người nhận không được bỏ trống",
+          trigger: "blur"
+        }],
+        noi_dung: [{
+          required: true,
+          message: "Nội dung không được bỏ trống",
+          trigger: "blur"
+        }]
+      }
+    };
+  }
+}, _defineProperty(_name$components$prop, "props", {
+  active: {
+    type: Boolean,
+    "default": false
+  }
+}), _defineProperty(_name$components$prop, "created", function created() {
+  this.getThanhVien();
+}), _defineProperty(_name$components$prop, "watch", {
+  active: function active(val) {
+    this.showSoanThu = val;
+  }
+}), _defineProperty(_name$components$prop, "methods", {
+  close: function close() {
+    this.$emit("onClose");
+  },
+  getThanhVien: function getThanhVien() {
+    var _this = this;
+
+    axios.get("dsthanhvien").then(function (res) {
+      _this.nguoinhans = res.data.data;
+      console.log("thanh", _this.nguoinhans);
+    });
+  },
+  submit: function submit(create) {
+    var _this2 = this;
+
+    this.$refs[create].validate(function (valid) {
+      if (valid) {
+        _this2.formLabelAlign.user_nhan_id = _this2.formLabelAlign.user_nhan_id.id;
+        axios.post("/guithu", _this2.formLabelAlign).then(function (res) {
+          _this2.loading = false;
+          _this2.formLabelAlign.noi_dung = null;
+
+          _this2.$emit("onSoanThu", true);
+        });
+      } else {
+        return false;
+      }
+    });
+  }
+}), _name$components$prop);
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SuaChuDe.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SuaChuDe.vue?vue&type=script&lang=js& ***!
@@ -4747,7 +5285,7 @@ __webpack_require__.r(__webpack_exports__);
           trigger: "blur"
         }, {
           min: 2,
-          message: "Tên phòng tối thiểu 2 ký tự",
+          message: "chủ đề tối thiểu 2 ký tự",
           trigger: "blur"
         }],
         mo_ta: [{
@@ -5135,7 +5673,7 @@ __webpack_require__.r(__webpack_exports__);
           trigger: "blur"
         }, {
           min: 2,
-          message: "Tên phòng tối thiểu 2 ký tự",
+          message: "chủ đề tối thiểu 2 ký tự",
           trigger: "blur"
         }],
         mo_ta: [{
@@ -11998,7 +12536,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* RESET */\r\n\r\n/* Style the tabs */\n.tabs[data-v-1e972ee0] {\r\n  overflow: hidden;\r\n  margin-left: 20px;\r\n  margin-bottom: -2px;\n}\n.tabs ul[data-v-1e972ee0] {\r\n  list-style-type: none;\r\n  margin-left: 20px;\n}\n.tabs a[data-v-1e972ee0] {\r\n  float: left;\r\n  cursor: pointer;\r\n  padding: 12px 24px;\r\n  transition: background-color 0.2s;\r\n  border: 1px solid #ccc;\r\n  border-right: none;\r\n  background-color: #f1f1f1;\r\n  border-radius: 10px 10px 0 0;\r\n  font-weight: bold;\n}\n.tabs a[data-v-1e972ee0]:last-child {\r\n  border-right: 1px solid #ccc;\n}\r\n\r\n/* Change background color of tabs on hover */\n.tabs a[data-v-1e972ee0]:hover {\r\n  background-color: #aaa;\r\n  color: #fff;\n}\r\n\r\n/* Styling for active tab */\n.tabs a.active[data-v-1e972ee0] {\r\n  background-color: #fff;\r\n  color: #484848;\r\n  border-bottom: 2px solid #fff;\r\n  cursor: default;\n}\r\n\r\n/* Style the tab content */\n.tabcontent[data-v-1e972ee0] {\r\n  padding: 30px;\r\n  border: 1px solid #ccc;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 6px #e1e1e1;\n}\n.upload-image[data-v-1e972ee0] {\r\n  display: none;\r\n  z-index: -9999;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* RESET */\r\n\r\n/* Style the tabs */\n.tabs[data-v-1e972ee0] {\r\n  overflow: hidden;\r\n  margin-left: 20px;\r\n  margin-bottom: -2px;\n}\n.tabs ul[data-v-1e972ee0] {\r\n  list-style-type: none;\r\n  margin-left: 20px;\n}\n.tabs a[data-v-1e972ee0] {\r\n  float: left;\r\n  cursor: pointer;\r\n  padding: 12px 24px;\r\n  transition: background-color 0.2s;\r\n  border: 1px solid #ccc;\r\n  border-right: none;\r\n  background-color: #f1f1f1;\r\n  border-radius: 10px 10px 0 0;\r\n  font-weight: bold;\n}\n.tabs a[data-v-1e972ee0]:last-child {\r\n  border-right: 1px solid #ccc;\n}\r\n\r\n/* Change background color of tabs on hover */\n.tabs a[data-v-1e972ee0]:hover {\r\n  background-color: #aaa;\r\n  color: #fff;\n}\r\n\r\n/* Styling for active tab */\n.tabs a.active[data-v-1e972ee0] {\r\n  background-color: #fff;\r\n  color: #484848;\r\n  border-bottom: 2px solid #fff;\r\n  cursor: default;\n}\r\n\r\n/* Style the tab content */\n.tabcontent[data-v-1e972ee0] {\r\n  padding: 30px;\r\n  border: 1px solid #ccc;\r\n  border-radius: 10px;\r\n  box-shadow: 3px 3px 6px #e1e1e1;\n}\n.upload-image[data-v-1e972ee0] {\r\n  display: none;\r\n  z-index: -9999;\n}\r\n", ""]);
 
 // exports
 
@@ -104803,6 +105341,152 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168&":
+/*!*********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168& ***!
+  \*********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-dialog",
+        {
+          attrs: {
+            visible: _vm.showFormBaoCao,
+            title: "BÁO CÁO VI PHẠM",
+            width: "30%"
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.showFormBaoCao = $event
+            },
+            close: function($event) {
+              return _vm.close()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "formLabelAlign",
+              attrs: {
+                "label-position": _vm.labelPosition,
+                "label-width": "100px",
+                model: _vm.formLabelAlign,
+                rules: _vm.rules
+              }
+            },
+            [
+              _c(
+                "el-row",
+                { attrs: { gutter: 20, justify: "space-around" } },
+                [
+                  _c("el-col", { staticStyle: { "font-size": "16px" } }, [
+                    _c("p", [_vm._v("Gửi báo cáo vi phạm!")]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        " Với các câu hỏi trùng lặp, câu trả lời câu hỏi vi phạm thuần phong mỹ tục, gây ảnh hưởng đến người khác. Hãy gửi báo cáo cho chúng tôi "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "el-col",
+                    [
+                      _c("el-form-item", { attrs: { prop: "noi_dung" } }, [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              "font-size": "16px",
+                              "font-weight": "bold"
+                            }
+                          },
+                          [_vm._v("Nội dung báo cáo")]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formLabelAlign.noi_dung,
+                              expression: "formLabelAlign.noi_dung"
+                            }
+                          ],
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            size: "large",
+                            rows: "2",
+                            placeholder: "Nhập lý do báo cáo"
+                          },
+                          domProps: { value: _vm.formLabelAlign.noi_dung },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formLabelAlign,
+                                "noi_dung",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      staticStyle: { width: "100%" },
+                      attrs: { type: "primary", loading: _vm.loading },
+                      on: {
+                        click: function($event) {
+                          return _vm.submit("formLabelAlign")
+                        }
+                      }
+                    },
+                    [_vm._v("Gửi báo cáo")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BinhLuan.vue?vue&type=template&id=0127fd42&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BinhLuan.vue?vue&type=template&id=0127fd42&scoped=true& ***!
@@ -104827,6 +105511,19 @@ var render = function() {
         [
           _c("FlashMessage"),
           _vm._v(" "),
+          _c("Bao-Cao", {
+            attrs: {
+              active: _vm.showFormBaoCao,
+              CauTraLoi: _vm.CauTraLoi,
+              CauHoi: _vm.CauHoi
+            },
+            on: {
+              onClose: function($event) {
+                return _vm.handleClose()
+              }
+            }
+          }),
+          _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-1" }, [
               _c("img", {
@@ -104835,7 +105532,7 @@ var render = function() {
               })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-10" }, [
+            _c("div", { staticClass: "col-md-9" }, [
               _c(
                 "p",
                 { staticStyle: { "font-weight": "bold", "font-size": "20px" } },
@@ -104863,8 +105560,35 @@ var render = function() {
             _vm.user_login != null
               ? _c(
                   "div",
-                  { staticClass: "col-md-1" },
+                  { staticClass: "col-md-2" },
                   [
+                    _c(
+                      "el-tooltip",
+                      {
+                        staticClass: "item",
+                        attrs: {
+                          effect: "dark",
+                          content: "Báo cáo vi phạm",
+                          placement: "top"
+                        }
+                      },
+                      [
+                        _c("el-button", {
+                          attrs: {
+                            type: "warning",
+                            icon: "el-icon-edit",
+                            circle: ""
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.baoCaoCauHoi(_vm.cauhoi.id)
+                            }
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
                     _c(
                       "el-tooltip",
                       {
@@ -105137,7 +105861,7 @@ var render = function() {
                               },
                               on: {
                                 click: function($event) {
-                                  return _vm.baoCaoViPham(cautraloi.id)
+                                  return _vm.baoCaoCauTraLoi(cautraloi.id)
                                 }
                               }
                             })
@@ -105334,6 +106058,18 @@ var render = function() {
         }
       }),
       _vm._v(" "),
+      _c("Soan-Thu", {
+        attrs: { active: _vm.showFormSoanThu },
+        on: {
+          onClose: function($event) {
+            return _vm.handleClose()
+          },
+          onSoanThu: function(SoanThu) {
+            return _vm.handleSoanThu(SoanThu)
+          }
+        }
+      }),
+      _vm._v(" "),
       _c("hr"),
       _vm._v(" "),
       _c("div", [
@@ -105403,6 +106139,32 @@ var render = function() {
               }
             },
             [_vm._v("Thành viên")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              class: [_vm.activetab === 6 ? "active" : ""],
+              on: {
+                click: function($event) {
+                  _vm.activetab = 6
+                }
+              }
+            },
+            [_vm._v("Hộp thư")]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              class: [_vm.activetab === 7 ? "active" : ""],
+              on: {
+                click: function($event) {
+                  _vm.activetab = 7
+                }
+              }
+            },
+            [_vm._v("Lịch sử đăng nhập")]
           )
         ]),
         _vm._v(" "),
@@ -105632,70 +106394,199 @@ var render = function() {
             ? _c(
                 "div",
                 { staticClass: "tabcontent" },
-                _vm._l(_vm.bao_cao_vi_pham, function(bao_cao) {
-                  return _c("div", [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-1" }, [
-                        _c("img", {
-                          staticStyle: { width: "80px", height: "80px" },
-                          attrs: { src: bao_cao.user.anh_dai_dien }
-                        })
-                      ]),
-                      _vm._v(" "),
+                [
+                  _c(
+                    "el-tabs",
+                    {
+                      model: {
+                        value: _vm.activeName2,
+                        callback: function($$v) {
+                          _vm.activeName2 = $$v
+                        },
+                        expression: "activeName2"
+                      }
+                    },
+                    [
                       _c(
-                        "div",
-                        { staticClass: "col-md-9" },
+                        "el-tab-pane",
+                        {
+                          attrs: { label: "Câu trả lời vi phạm", name: "first" }
+                        },
                         [
-                          _c("p", { staticStyle: { "font-size": "18px" } }, [
-                            _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href: "../taikhoan/" + bao_cao.user.id
-                                }
-                              },
-                              [_vm._v(_vm._s(bao_cao.user.name))]
-                            ),
-                            _vm._v(" Đã trả lời\n                "),
-                            _c(
-                              "span",
-                              { staticStyle: { "margin-left": "20px" } },
-                              [
-                                _vm._v(
-                                  "Thời gian: " + _vm._s(bao_cao.created_at)
-                                )
-                              ]
-                            )
+                          _c("br"),
+                          _c("h4", [
+                            _vm._v("Danh sách báo cáo câu trả lời vi phạm")
                           ]),
+                          _c("br"),
                           _vm._v(" "),
-                          _c(
-                            "p",
-                            {
-                              staticStyle: {
-                                "font-size": "20px",
-                                "font-weight": "bold"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(bao_cao.noi_dung.substr(0, 200)) + "..."
-                              )
-                            ]
-                          ),
-                          _vm._v("Báo cáo bởi:\n              "),
-                          _vm._l(bao_cao.bao_cao_vi_pham, function(
-                            nguoibaocao
-                          ) {
-                            return _c("span", [
-                              _c(
-                                "a",
-                                {
-                                  attrs: {
-                                    href: "../taikhoan/" + nguoibaocao.user.id
-                                  }
-                                },
-                                [_vm._v(_vm._s(nguoibaocao.user.name) + ",")]
-                              )
+                          _vm._l(_vm.bao_cao_vi_pham, function(bao_cao) {
+                            return _c("div", [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-md-1" }, [
+                                  _c("img", {
+                                    staticStyle: {
+                                      width: "80px",
+                                      height: "80px"
+                                    },
+                                    attrs: { src: bao_cao.user.anh_dai_dien }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-9" },
+                                  [
+                                    _c(
+                                      "p",
+                                      { staticStyle: { "font-size": "18px" } },
+                                      [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href:
+                                                "../taikhoan/" + bao_cao.user.id
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(bao_cao.user.name))]
+                                        ),
+                                        _vm._v(" Đã trả lời\n                "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticStyle: {
+                                              "margin-left": "20px"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "Thời gian: " +
+                                                _vm._s(bao_cao.created_at)
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      {
+                                        staticStyle: {
+                                          "font-size": "20px",
+                                          "font-weight": "bold"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            bao_cao.noi_dung.substr(0, 200)
+                                          ) + "..."
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v("Báo cáo bởi:\n              "),
+                                    _vm._l(bao_cao.bao_cao_vi_pham, function(
+                                      nguoibaocao
+                                    ) {
+                                      return _c("div", [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href:
+                                                "../taikhoan/" +
+                                                nguoibaocao.user.id
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(nguoibaocao.user.name) +
+                                                ","
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(
+                                          "\n                Lý do: " +
+                                            _vm._s(nguoibaocao.noi_dung) +
+                                            "\n                "
+                                        ),
+                                        _c("br")
+                                      ])
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-2" },
+                                  [
+                                    _c(
+                                      "el-tooltip",
+                                      {
+                                        staticClass: "item",
+                                        attrs: {
+                                          effect: "dark",
+                                          content: "Xóa",
+                                          placement: "top"
+                                        }
+                                      },
+                                      [
+                                        _c("el-button", {
+                                          attrs: {
+                                            size: "small",
+                                            type: "danger",
+                                            icon: "el-icon-delete",
+                                            circle: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.xoaViPham(bao_cao.id)
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-tooltip",
+                                      {
+                                        staticClass: "item",
+                                        attrs: {
+                                          effect: "dark",
+                                          content: "Bỏ qua",
+                                          placement: "top"
+                                        }
+                                      },
+                                      [
+                                        _vm.user.quyen_id == 1 ||
+                                        _vm.user.quyen_id == 2
+                                          ? _c("el-button", {
+                                              attrs: {
+                                                size: "small",
+                                                type: "success",
+                                                icon: "el-icon-check",
+                                                circle: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.boQuaCauTraLoi(
+                                                    bao_cao.id
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          : _vm._e()
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("hr")
                             ])
                           })
                         ],
@@ -105703,75 +106594,213 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "col-md-2" },
+                        "el-tab-pane",
+                        { attrs: { label: "Câu hỏi vi phạm", name: "second" } },
                         [
-                          _c(
-                            "el-tooltip",
-                            {
-                              staticClass: "item",
-                              attrs: {
-                                effect: "dark",
-                                content: "Xóa",
-                                placement: "top"
-                              }
-                            },
-                            [
-                              _c("el-button", {
-                                attrs: {
-                                  size: "small",
-                                  type: "danger",
-                                  icon: "el-icon-delete",
-                                  circle: ""
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.xoaViPham(bao_cao.id)
-                                  }
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                          _c("br"),
+                          _c("h4", [
+                            _vm._v("Danh sách báo cáo câu hỏi vi phạm")
+                          ]),
+                          _c("br"),
                           _vm._v(" "),
-                          _c(
-                            "el-tooltip",
-                            {
-                              staticClass: "item",
-                              attrs: {
-                                effect: "dark",
-                                content: "Bỏ qua",
-                                placement: "top"
-                              }
-                            },
-                            [
-                              _vm.user.quyen_id == 1 || _vm.user.quyen_id == 2
-                                ? _c("el-button", {
-                                    attrs: {
-                                      size: "small",
-                                      type: "success",
-                                      icon: "el-icon-check",
-                                      circle: ""
+                          _vm._l(_vm.cau_hoi_vi_pham, function(cauhoi) {
+                            return _c("div", [
+                              _c("div", { staticClass: "row" }, [
+                                _c("div", { staticClass: "col-md-1" }, [
+                                  _c("img", {
+                                    staticStyle: {
+                                      width: "80px",
+                                      height: "80px"
                                     },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.boQua(bao_cao.id)
-                                      }
-                                    }
+                                    attrs: { src: cauhoi.user.anh_dai_dien }
                                   })
-                                : _vm._e()
-                            ],
-                            1
-                          )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-9" },
+                                  [
+                                    _c(
+                                      "a",
+                                      {
+                                        attrs: {
+                                          href: "../binhluan/" + cauhoi.id
+                                        }
+                                      },
+                                      [
+                                        _c("h4", [
+                                          _vm._v(_vm._s(cauhoi.tieu_de))
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticStyle: { "font-size": "16px" } },
+                                      [
+                                        _vm._v(
+                                          "\n                Tạo bởi:\n                " +
+                                            _vm._s(_vm.user.name) +
+                                            "\n                "
+                                        ),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticStyle: {
+                                              "margin-left": "20px"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "Chủ đề: " +
+                                                _vm._s(cauhoi.chu_de.tieu_de)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticStyle: {
+                                              "margin-left": "20px"
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "Thời gian: " +
+                                                _vm._s(cauhoi.created_at)
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticStyle: { "font-size": "18px" } },
+                                      [
+                                        _vm._v(
+                                          _vm._s(
+                                            cauhoi.noi_dung.substr(0, 200)
+                                          ) + "..."
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(
+                                      "\n              Báo cáo bởi:\n              "
+                                    ),
+                                    _vm._l(cauhoi.bao_cao_vi_pham, function(
+                                      nguoibaocao
+                                    ) {
+                                      return _c("div", [
+                                        _c(
+                                          "a",
+                                          {
+                                            attrs: {
+                                              href:
+                                                "../taikhoan/" +
+                                                nguoibaocao.user.id
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              _vm._s(nguoibaocao.user.name) +
+                                                ","
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(
+                                          "\n                Lý do: " +
+                                            _vm._s(nguoibaocao.noi_dung) +
+                                            "\n                "
+                                        ),
+                                        _c("br")
+                                      ])
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-2" },
+                                  [
+                                    _c(
+                                      "el-tooltip",
+                                      {
+                                        staticClass: "item",
+                                        attrs: {
+                                          effect: "dark",
+                                          content: "Xóa",
+                                          placement: "top"
+                                        }
+                                      },
+                                      [
+                                        _c("el-button", {
+                                          attrs: {
+                                            size: "small",
+                                            type: "danger",
+                                            icon: "el-icon-delete",
+                                            circle: ""
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.xoaCauHoi(cauhoi.id)
+                                            }
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-tooltip",
+                                      {
+                                        staticClass: "item",
+                                        attrs: {
+                                          effect: "dark",
+                                          content: "Bỏ qua",
+                                          placement: "top"
+                                        }
+                                      },
+                                      [
+                                        _vm.user.quyen_id == 1 ||
+                                        _vm.user.quyen_id == 2
+                                          ? _c("el-button", {
+                                              attrs: {
+                                                size: "small",
+                                                type: "success",
+                                                icon: "el-icon-check",
+                                                circle: ""
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.boQuaCauHoi(
+                                                    cauhoi.id
+                                                  )
+                                                }
+                                              }
+                                            })
+                                          : _vm._e()
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("hr")
+                            ])
+                          })
                         ],
-                        1
+                        2
                       )
-                    ]),
-                    _vm._v(" "),
-                    _c("hr")
-                  ])
-                }),
-                0
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             : _vm._e(),
           _vm._v(" "),
@@ -106001,6 +107030,371 @@ var render = function() {
                   0
                 )
               ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.activetab === 6
+            ? _c(
+                "div",
+                { staticClass: "tabcontent" },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      staticStyle: { "margin-bottom": "15px" },
+                      attrs: { type: "primary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.soanThu()
+                        }
+                      }
+                    },
+                    [_vm._v("Soạn thư")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-tabs",
+                    {
+                      model: {
+                        value: _vm.activeName,
+                        callback: function($$v) {
+                          _vm.activeName = $$v
+                        },
+                        expression: "activeName"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-tab-pane",
+                        { attrs: { label: "Hộp thư đến", name: "first" } },
+                        _vm._l(_vm.thu_den, function(thuden, index) {
+                          return _c("div", [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-1" }, [
+                                _c("img", {
+                                  staticStyle: {
+                                    width: "80px",
+                                    height: "80px",
+                                    "border-radius": "50%",
+                                    border: "1px solid black"
+                                  },
+                                  attrs: { src: thuden.user_gui.anh_dai_dien }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-10" }, [
+                                _c("div", [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticStyle: {
+                                        "font-size": "18px",
+                                        "font-style": "italic",
+                                        "margin-bottom": "5px"
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                      Gửi từ:\n                      "
+                                      ),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticStyle: {
+                                            "font-weight": "bold",
+                                            "font-style": "normal"
+                                          }
+                                        },
+                                        [_vm._v(_vm._s(thuden.user_nhan.name))]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("div", [
+                                    _vm._v(
+                                      _vm._s(_vm.formatDate(thuden.created_at))
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "el-collapse",
+                                      {
+                                        model: {
+                                          value: _vm.activeNames,
+                                          callback: function($$v) {
+                                            _vm.activeNames = $$v
+                                          },
+                                          expression: "activeNames"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "el-collapse-item",
+                                          { attrs: { name: index } },
+                                          [
+                                            _c(
+                                              "template",
+                                              { slot: "title" },
+                                              [
+                                                _c("el-button", {
+                                                  staticStyle: {
+                                                    "margin-right": "5px"
+                                                  },
+                                                  attrs: {
+                                                    type: "primary",
+                                                    icon: "el-icon-view",
+                                                    circle: "",
+                                                    size: "mini"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticStyle: {
+                                                      "font-size": "16px"
+                                                    }
+                                                  },
+                                                  [_vm._v("Xem nội dung")]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "p",
+                                              {
+                                                staticStyle: {
+                                                  "font-size": "20px",
+                                                  "margin-top": "10px"
+                                                }
+                                              },
+                                              [_vm._v(_vm._s(thuden.noi_dung))]
+                                            )
+                                          ],
+                                          2
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("hr")
+                          ])
+                        }),
+                        0
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-tab-pane",
+                        { attrs: { label: "Thư đã gửi", name: "second" } },
+                        _vm._l(_vm.thu_da_gui, function(thu, index) {
+                          return _c("div", [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-1" }, [
+                                _c("img", {
+                                  staticStyle: {
+                                    width: "80px",
+                                    height: "80px",
+                                    "border-radius": "50%",
+                                    border: "1px solid black"
+                                  },
+                                  attrs: { src: thu.user_nhan.anh_dai_dien }
+                                })
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "col-md-10",
+                                  staticStyle: { "margin-left": "5px" }
+                                },
+                                [
+                                  _c("div", [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticStyle: {
+                                          "font-size": "18px",
+                                          "font-style": "italic",
+                                          "margin-bottom": "5px"
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                      Gửi đến:\n                      "
+                                        ),
+                                        _c(
+                                          "span",
+                                          {
+                                            staticStyle: {
+                                              "font-weight": "bold",
+                                              "font-style": "normal"
+                                            }
+                                          },
+                                          [_vm._v(_vm._s(thu.user_nhan.name))]
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("div", [
+                                      _vm._v(
+                                        _vm._s(_vm.formatDate(thu.created_at))
+                                      )
+                                    ])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    [
+                                      _c(
+                                        "el-collapse",
+                                        {
+                                          model: {
+                                            value: _vm.activeNames,
+                                            callback: function($$v) {
+                                              _vm.activeNames = $$v
+                                            },
+                                            expression: "activeNames"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "el-collapse-item",
+                                            { attrs: { name: index } },
+                                            [
+                                              _c(
+                                                "template",
+                                                { slot: "title" },
+                                                [
+                                                  _c("i", {
+                                                    staticClass: "el-icon-view",
+                                                    staticStyle: {
+                                                      "font-size": "16px",
+                                                      "margin-right": "5px"
+                                                    }
+                                                  }),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticStyle: {
+                                                        "font-size": "16px"
+                                                      }
+                                                    },
+                                                    [_vm._v("Xem nội dung")]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "p",
+                                                {
+                                                  staticStyle: {
+                                                    "font-size": "20px",
+                                                    "margin-top": "10px"
+                                                  }
+                                                },
+                                                [_vm._v(_vm._s(thu.noi_dung))]
+                                              )
+                                            ],
+                                            2
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("hr")
+                          ])
+                        }),
+                        0
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.activetab === 7
+            ? _c(
+                "div",
+                { staticClass: "tabcontent" },
+                [
+                  _c("h4", [_vm._v("Lịch sử đăng nhập")]),
+                  _vm._v(" "),
+                  _c("br"),
+                  _vm._v(" "),
+                  _c(
+                    "el-table",
+                    {
+                      staticStyle: { width: "100%" },
+                      attrs: { data: _vm.lich_su, border: "" }
+                    },
+                    [
+                      _c("el-table-column", {
+                        attrs: { label: "STT", width: "90", align: "center" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "default",
+                              fn: function(scope) {
+                                return [_vm._v(_vm._s(scope.$index + 1))]
+                              }
+                            }
+                          ],
+                          null,
+                          false,
+                          322047289
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { label: "Thời gian", width: "180" },
+                        scopedSlots: _vm._u(
+                          [
+                            {
+                              key: "default",
+                              fn: function(scope) {
+                                return [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.formatTimeLogIn(scope.row.created_at)
+                                    )
+                                  )
+                                ]
+                              }
+                            }
+                          ],
+                          null,
+                          false,
+                          213895779
+                        )
+                      }),
+                      _vm._v(" "),
+                      _c("el-table-column", {
+                        attrs: { prop: "noi_dung", label: "Chi tiết" }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             : _vm._e()
         ])
       ])
@@ -106436,6 +107830,242 @@ var render = function() {
               }
             },
             [_vm._v("ĐĂNG")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-dialog",
+        {
+          attrs: { visible: _vm.showSoanThu, title: "SOẠN THƯ MỚI" },
+          on: {
+            "update:visible": function($event) {
+              _vm.showSoanThu = $event
+            },
+            close: function($event) {
+              return _vm.close()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "formLabelAlign",
+              attrs: {
+                "label-position": _vm.labelPosition,
+                "label-width": "100px",
+                model: _vm.formLabelAlign,
+                rules: _vm.rules
+              }
+            },
+            [
+              _c(
+                "el-row",
+                { attrs: { gutter: 20, justify: "space-around" } },
+                [
+                  _c(
+                    "el-col",
+                    [
+                      _c("el-form-item", { attrs: { prop: "user_nhan_id" } }, [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              "font-size": "18px",
+                              "font-weight": "bold"
+                            }
+                          },
+                          [_vm._v("Đến")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          [
+                            _c("multiselect", {
+                              attrs: {
+                                placeholder: "Người nhận",
+                                label: "name",
+                                "track-by": "id",
+                                options: _vm.nguoinhans
+                              },
+                              scopedSlots: _vm._u([
+                                {
+                                  key: "option",
+                                  fn: function(props) {
+                                    return [
+                                      _c(
+                                        "el-row",
+                                        [
+                                          _c("el-col", { attrs: { span: 4 } }, [
+                                            _c("img", {
+                                              staticClass: "option__image",
+                                              staticStyle: {
+                                                "border-radius": "50%",
+                                                border: "2px solid black"
+                                              },
+                                              attrs: {
+                                                src: props.option.anh_dai_dien,
+                                                height: "70px",
+                                                width: "70px"
+                                              }
+                                            })
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "el-col",
+                                            { attrs: { span: 20 } },
+                                            [
+                                              _c("br"),
+                                              _vm._v(" "),
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticStyle: {
+                                                    "font-weight": "bold"
+                                                  }
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(props.option.name)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("br"),
+                                              _c("br"),
+                                              _vm._v(
+                                                "\n                    " +
+                                                  _vm._s(props.option.email) +
+                                                  "\n                  "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  }
+                                }
+                              ]),
+                              model: {
+                                value: _vm.formLabelAlign.user_nhan_id,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.formLabelAlign,
+                                    "user_nhan_id",
+                                    $$v
+                                  )
+                                },
+                                expression: "formLabelAlign.user_nhan_id"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-col",
+                    [
+                      _c("el-form-item", { attrs: { prop: "mo_ta" } }, [
+                        _c(
+                          "label",
+                          {
+                            staticStyle: {
+                              "font-size": "18px",
+                              "font-weight": "bold"
+                            }
+                          },
+                          [_vm._v("Nội dung")]
+                        ),
+                        _vm._v(" "),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.formLabelAlign.noi_dung,
+                              expression: "formLabelAlign.noi_dung"
+                            }
+                          ],
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            size: "large",
+                            rows: "2",
+                            placeholder: "Nội dung"
+                          },
+                          domProps: { value: _vm.formLabelAlign.noi_dung },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.formLabelAlign,
+                                "noi_dung",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      staticStyle: { width: "100%" },
+                      attrs: { type: "primary", loading: _vm.loading },
+                      on: {
+                        click: function($event) {
+                          return _vm.submit("formLabelAlign")
+                        }
+                      }
+                    },
+                    [_vm._v("GỬI")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
           )
         ],
         1
@@ -121604,6 +123234,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('ketqua-timkiem', __webpack
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('thongtin-taikhoan', __webpack_require__(/*! ./components/ThongTinTaiKhoan.vue */ "./resources/js/components/ThongTinTaiKhoan.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Them-Chude', __webpack_require__(/*! ./components/ThemChuDe.vue */ "./resources/js/components/ThemChuDe.vue")["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Sua-Chude', __webpack_require__(/*! ./components/SuaChuDe.vue */ "./resources/js/components/SuaChuDe.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Soan-Thu', __webpack_require__(/*! ./components/SoanThu.vue */ "./resources/js/components/SoanThu.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Bao-Cao', __webpack_require__(/*! ./components/BaoCao.vue */ "./resources/js/components/BaoCao.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -121671,6 +123303,75 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/BaoCao.vue":
+/*!********************************************!*\
+  !*** ./resources/js/components/BaoCao.vue ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BaoCao.vue?vue&type=template&id=898d7168& */ "./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168&");
+/* harmony import */ var _BaoCao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BaoCao.vue?vue&type=script&lang=js& */ "./resources/js/components/BaoCao.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BaoCao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/BaoCao.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/BaoCao.vue?vue&type=script&lang=js&":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/BaoCao.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BaoCao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./BaoCao.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BaoCao.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BaoCao_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168& ***!
+  \***************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./BaoCao.vue?vue&type=template&id=898d7168& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BaoCao.vue?vue&type=template&id=898d7168&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BaoCao_vue_vue_type_template_id_898d7168___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -122103,6 +123804,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NhapCauhoi_vue_vue_type_template_id_6478a07f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NhapCauhoi_vue_vue_type_template_id_6478a07f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SoanThu.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/components/SoanThu.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SoanThu.vue?vue&type=template&id=eb45ecc6& */ "./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6&");
+/* harmony import */ var _SoanThu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SoanThu.vue?vue&type=script&lang=js& */ "./resources/js/components/SoanThu.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _SoanThu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/SoanThu.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/SoanThu.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/SoanThu.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SoanThu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./SoanThu.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SoanThu.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SoanThu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6& ***!
+  \****************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./SoanThu.vue?vue&type=template&id=eb45ecc6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SoanThu.vue?vue&type=template&id=eb45ecc6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SoanThu_vue_vue_type_template_id_eb45ecc6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

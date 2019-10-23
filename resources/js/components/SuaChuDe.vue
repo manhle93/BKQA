@@ -59,7 +59,7 @@ export default {
             message: "Tên chủ đề không được bỏ trống",
             trigger: "blur"
           },
-          { min: 2, message: "Tên phòng tối thiểu 2 ký tự", trigger: "blur" }
+          { min: 2, message: "chủ đề tối thiểu 2 ký tự", trigger: "blur" }
         ],
         mo_ta: [
           {

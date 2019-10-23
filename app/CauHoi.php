@@ -32,4 +32,8 @@ class CauHoi extends Model
     {
         return $this->hasMany('App\ThongBao');
     }
+    public function baoCaoViPham()
+    {
+        return $this->hasMany('App\BaoCaoViPham', 'cau_hoi_bao_cao_id', 'id');
+    }
 }

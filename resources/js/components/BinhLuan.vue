@@ -2,11 +2,12 @@
   <div class="container" style="font-family: 'Open Sans';">
     <div>
       <FlashMessage></FlashMessage>
+      <Bao-Cao :active="showFormBaoCao" :CauTraLoi="CauTraLoi" :CauHoi="CauHoi" @onClose="handleClose()"></Bao-Cao>
       <div class="row">
         <div class="col-md-1">
           <img :src="cauhoi.user.anh_dai_dien" style="width: 80px; height:80px" />
         </div>
-        <div class="col-md-10">
+        <div class="col-md-9">
           <p style="font-weight:bold; font-size: 20px">{{cauhoi.tieu_de}}</p>
           <p style="font-size: 18px ;">
             Tạo bởi: <a :href="`../taikhoan/${cauhoi.user.id}`"> {{cauhoi.user.name}}</a>
@@ -16,7 +17,15 @@
             <span style="margin-left: 20px">Thời gian: {{cauhoi.created_at}}</span>
           </p>
         </div>
-        <div v-if="user_login != null" class="col-md-1">
+        <div v-if="user_login != null" class="col-md-2">
+          <el-tooltip class="item" effect="dark" content="Báo cáo vi phạm" placement="top">
+            <el-button
+              @click="baoCaoCauHoi(cauhoi.id)"
+              type="warning"
+              icon="el-icon-edit"
+              circle
+            ></el-button>
+          </el-tooltip>
           <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
             <el-button
               v-if="user_login.id == cauhoi.user.id || user_login.quyen_id == 1 || user_login.quyen_id == 2"
@@ -98,7 +107,7 @@
               content="Báo cáo vi phạm"
               placement="top"
             >
-              <el-button @click="baoCaoViPham(cautraloi.id)" type="warning" icon="el-icon-edit" circle></el-button>
+              <el-button @click="baoCaoCauTraLoi(cautraloi.id)" type="warning" icon="el-icon-edit" circle></el-button>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="Xóa" placement="top">
               <el-button
@@ -118,12 +127,16 @@
   </div>
 </template>
 <script>
+import BaoCao from "./BaoCao"
 export default {
   props: ["cauhoi"],
   data() {
     return {
+      showFormBaoCao: false,
       so_cau_tra_loi: 0,
       noi_dung: "",
+      CauTraLoi: null,
+      CauHoi: null,
       user_login: "",
       cautralois: [],
       user_votes: [],
@@ -151,12 +164,20 @@ export default {
           this.getBinhLuan();
         });
     },
-    async baoCaoViPham(id) {
-      let data = await axios.post(`/baocaovipham/${id}`);
-      this.$message({
-        message: "Đã báo cáo câu trả lời vi phạm",
-        type: "success"
-      });
+    handleClose(){
+      this.showFormBaoCao = false;
+      this.$emit("onRefresh");
+    },
+    baoCaoCauHoi(id) {
+       this.showFormBaoCao = true;
+       this.CauTraLoi = null
+       this.CauHoi = id;
+    },
+
+    baoCaoCauTraLoi(id) {
+      this.showFormBaoCao = true;
+      this.CauTraLoi = id;
+      this.CauHoi = null
     },
     getBinhLuan() {
       axios.get(`/cautraloi/${this.cauhoi.id}`).then(res => {
