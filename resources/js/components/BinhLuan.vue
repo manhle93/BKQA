@@ -82,7 +82,7 @@
             <el-tooltip class="item" effect="dark" content="Vote" placement="top">
               <a @click="vote(cautraloi.id)">
                 <img
-                  src="/storage/images/avatar/vote.png"
+                  src="../storage/images/avatar/vote.png"
                   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)"
                   style="width: 40px; height: 40px"
                 />

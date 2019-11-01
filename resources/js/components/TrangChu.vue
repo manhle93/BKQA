@@ -2,6 +2,7 @@
   <div>
     <div class="banner">
       <img src="anh/banner.png" width="100%" height="500px" />
+      <!-- <img src="anh/project2.jpg" width="100%" height="500px" /> -->
     </div>
     <div class="container" style="font-family: 'Open Sans'">
       <div class="row justify-content-center">

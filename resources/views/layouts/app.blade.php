@@ -80,7 +80,7 @@
     </div>
 </body>
 <footer>
-    <img src="http://127.0.0.1:8000/anh/footer.png" style="width: 100%">
+    <img src="../anh/footer.png" style="width: 100%">
 </footer>
 
 </html>
