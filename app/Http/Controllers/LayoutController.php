@@ -95,6 +95,9 @@ class LayoutController extends Controller
     public function thongTinCaNhan()
     {
         // $user = auth()->user();
+        if(!auth()->user()){
+            return redirect('/');
+        }
         $user = User::where('id', auth()->user()->id)->with('quyen')->first();
         $cauHois = CauHoi::where('user_id', $user->id)->get();
         return view('canhan', ['user' => $user, 'cauhois' => $cauHois]);
