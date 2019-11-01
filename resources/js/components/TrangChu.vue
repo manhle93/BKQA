@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="banner">
-      <img src="https://lh3.googleusercontent.com/0bj6UwKvL8joxjoWAQG2McAjZa1nkL45hYK9miASsVufDv-hk24Ro7XocMgHjibXBVid9bjGCQrViyBEqYvXAakUwiDl8x59oeHszEDiS_gmKcyvfuU4G7Iyg-KLRvggKXnq3CF-tm7WJPevpBjYyPRhOv57sJtxkXSBrEvt0QEg9qQLRMfX12Ue49fr7a1eBjnHs53UqaF3LuWFDG9utp3CdzB1S_HM_YirLogsWRwitwiUagIrKfMMGDuWLqQA5509ryqHOlWlcS_DbGquQWUYIwyGUJOTIh2STC5EqewdT2uJJbSDP-nFPlbxxvA4mI5_qR1xHnOLnUZEGpt62s62FCwgfnL2yesK9xnXU0FDtnGqu9gZJQ1rnDZcxCz6EE73JI0RsoZGO5qeiYuFehcWvTMEbgo-dFulydUn2NTgv9zJJYl64XoVU0v-KEi2u0v9n_d_Bhw9NDdVFYZk3N3lIPeCjDx9O5jbRcNBUeYtsRHP-mipRuMO3YDJhs0wV-OXdhGWppl-6Xv5er_ZJuv7B6vexCLLBEGEgrZuymLbjTwuSlB9BuZ7uA_gFvExTXSIJe_WMoHTrGK6vH8-2UwAfbQS4emL8d0lJGOCNMdpSF9NVw_vhWdvEpmQetYrpkC4xAmtGgOXKHL6uHJKhfyU5x_OkVziMNp7blMamiFbmbr3t_UyIg=w1200-h608-no" width="100%" height="500px" />
+      <img src="https://1.bp.blogspot.com/-f9fU1gJGhA4/Xbvr8mk2y-I/AAAAAAAAADM/4N-MMwwLc74xGhi8GybIfRY063rOwAU1ACEwYBhgL/s1600/banner.png" width="100%" height="500px" />
       <!-- <img src="anh/project2.jpg" width="100%" height="500px" /> -->
     </div>
     <div class="container" style="font-family: 'Open Sans'">

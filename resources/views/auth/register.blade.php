@@ -6,7 +6,7 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                <img src="anh/logo.png" style="width: 100%">
+                <img src="https://1.bp.blogspot.com/-c9hDz_-Jh9c/XbvtBdEp_4I/AAAAAAAAADs/V97AHWrcGOUCwP__wLdDgNqW7CC2cOZUgCLcBGAsYHQ/s1600/logo.png" style="width: 100%">
                 <hr>
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

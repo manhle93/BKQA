@@ -23,7 +23,7 @@
                       >{{thongbao.user_tra_loi.name}} {{thongbao.noi_dung}}</a>
                     </el-dropdown-item>
                     <el-dropdown-item v-if="thongbao.user_tra_loi_id == null">
-                      <img src="https://lh3.googleusercontent.com/ig3sXFVG-aX5Q5yPS_ioqyEDZ-SLwOMbKroa_g-D2u48lREZNE97_QpqZfh1kPIrzR0TBj0VZJFZQqQikbLZt-j4FP60eQMmmX6XuhwY5D7cORLWG1YKXmVQFloxlfeihQyPGNLupiXnlimC1DNH7opcKdNwFnoCkSiv1IBk1wKMF9iz9TdZrXMGXYX-DXMWy-flOQjqomquEbMMiMjvmHQ44AHULTEAPDHkk4lJYj_HJFu0apT5gKseIhQCserzb_3mA0n0TCaTmveKnOrgkmvszen6rshRRjQmgD22drv4EbdrwIHdwlPy2N7BLsBG0tVF2r_nxikw9RGiPsYvLe0TaaSZyGO0uSXPHuEM--fxSQP_nktENe6kZJMhkyGlmmW_egvAW8DG8cK8my_w21HDL0ADuoEOVMVJvWOqMGB5pGAsx-x0FzTY4mOLEqE1S8H0NmK-8YLEfIDYfkozG_7oP1l_knNCQFwGOFxz5_aMY0n38EcBenq_4Wh5liOfc1TEB3rNcx_mnE2UpoBnJ2Jc25Sc716-XUw-XN2ZTW97AwFi3P5k4fq2j9OKmpZGEJc-yaoyJm342tp-rMTpWci9g5h_6vx-MfVfGeVOiFuFwp2-R6oOw567FmoUQsTYayfp6BCARGNVvU7xkThWvrIqVV07TCTmAqY5flyvjsjhiUw7xmxEow=w416-h342-no" style="width: 50px; height:50px;" />
+                      <img src="https://1.bp.blogspot.com/-5Romxa9R20o/XbvuWVON2AI/AAAAAAAAAEQ/vU9OukcyDZg6bpNMOJjFP56ahTPzm5fcACLcBGAsYHQ/s1600/pheduyet.jpg" style="width: 50px; height:50px;" />
                       <a :href="`/binhluan/${thongbao.cau_hoi_id}`">{{thongbao.noi_dung}}</a>
                     </el-dropdown-item>
                   </div>
