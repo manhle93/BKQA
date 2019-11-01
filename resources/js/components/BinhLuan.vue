@@ -82,7 +82,7 @@
             <el-tooltip class="item" effect="dark" content="Vote" placement="top">
               <a @click="vote(cautraloi.id)">
                 <img
-                  src="/anh/vote.png"
+                  src="https://lh3.googleusercontent.com/udYs-WVDZWvseQsH65kdwliBnk6F0w3BHjYozNiv0OVSLBkpKbA5SokKz26rOTj_UMnd6oWoZsyhlGIMQAeyw9RHxB9DMiURXHHXRSl85BwLemqqOlELhFH6NpogjFzRT4l-WTCDRAR74YvZZKnWMxy0TwBoDmRhrhiwmNoEyLEHOHDh4RzO0hqSQ28KVb7lqjPPS9mXxMn_RIRPGuUGSvz44bioXYPCutPBFnuGjFHjKU1H4W3B755P9KN6cHM3AXhpTKx9pNbhMn2MjbSFhGfDK67-aHwDB7VJI-ZDaZcyDdlN1wBCYruKCJdydCiQjVrud6gISz3oEpZi1Dr0FOE9AxwezjKFxQJPJF9uILSNRNc_fo0c8y4h_o7vprAvnmnFmLMI8Il06XSoSQXUPoZ4oiAfCkJ7xwEad3KBiM07eft7Xdg4Yzmj3_Q9zcQvRl8Fu2wqVD16NjozZbPEWDWKDf5E_JdokcGYc8E2F7sgc4R44pJPwlRVuS5S7Vms5SmAC0pi2ninzDbF5jNq5tT30blFqZ9rz9M0sihBVYiocniNeDJLvuO6wS5KYcWIZ7MAMleFHIay-UvJ2pMlONbF4mAnRh5ggazx4NkVYXfHYdf802TLGUh2YvdgA2X6Yisavh5xEFCURenCmWvzqKKgXnUSalApghf6Mpyh3aCVAddV01F90w=s256-no"
                   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)"
                   style="width: 40px; height: 40px"
                 />
@@ -92,7 +92,7 @@
             <el-tooltip class="item" effect="dark" content="Bỏ Vote" placement="top">
               <a>
                 <img
-                  src="/anh/unvote.png"
+                  src="https://lh3.googleusercontent.com/EGKQXHIUHG9gcO9Jq0Mb9FdyJY6hUiJsoUFqWqJSL_nQJKKTxnfaGMr-7m67XLfXtxXPd4eisogvbvKSllc_xyoD_MuSiauOQVNJ-DdAvvaw6ocJ9811ch1ZiFzo5QK3tGXC23Sey-OuxdgpZFMXPe6gex9uVfGRn-r_zBV6PUCYvYpw6WV8_fOr04TeC3tTGJPdw6ULVa-YIY4VEvbByQuzDvcfjK2Y7R_XgG8dcvf_sJhh481ueCOIEqJro4Ozf2GW2U4j9U8J6gqks5-9Rj484ZQGuM_Jcs3LNlO0K6GnW52GtLbpRpHu1dGwJktOxoh4wJGlEjq4kWd-igJJgy60J8c-jw05cATJdKc1mvdTyn3cJsF7lQ7_2dJHWDWYHWAsmABbJo70LkAS0s9hP3rHdqVQIjJH0tW80mLdiQEhl6LIi_ierP4n-mEWtNlaZdHv8vGiqCTVCnV3W7Dd8qg6_IXCfI9m6pYrbWx_hawMbNdIBWZaazLMsZjpyPwPuBm60Ksw2YbqD2HtfOyqVun9ye8zWXRQzq8CbQqajsrhvQEYcYeWR4uSM-ZBJBZlzxSutcONyhMQXez1iLjOjn73pFmpLn4pdQZdgLk4tXZybd0Jt2GChCgktPYtuUEdGPSfpUk9zckBc6IauuIf816LY3Jt8iMByzkoK8HPl3P7YqnF4j9f4w=s512-no"
                   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) != x)"
                   @click="unVote(cautraloi.id)"
                   style="width: 40px; height: 40px"
