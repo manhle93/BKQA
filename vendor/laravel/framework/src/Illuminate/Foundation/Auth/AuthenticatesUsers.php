@@ -53,7 +53,6 @@ trait AuthenticatesUsers
                     'user_id' => $user->id,
                     'noi_dung' => $request->header('User-Agent')
                 ]);
-                return $this->sendLoginResponse($request);
             } catch (\Exception $e) {
                 return response()->json([
                     'data' => $e,
@@ -61,6 +60,7 @@ trait AuthenticatesUsers
                     'message' => "Không thể lưu lịch sử hoạt động"
                 ], 500);
             }
+            return $this->sendLoginResponse($request);
         }
 
         // If the login attempt was unsuccessful we will increment the number of attempts
