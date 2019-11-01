@@ -105799,9 +105799,7 @@ var render = function() {
                                     width: "40px",
                                     height: "40px"
                                   },
-                                  attrs: {
-                                    src: "/storage/images/avatar/vote.png"
-                                  }
+                                  attrs: { src: "/anh/vote.png" }
                                 })
                               : _vm._e()
                           ]
@@ -105827,9 +105825,7 @@ var render = function() {
                           }) != _vm.x
                             ? _c("img", {
                                 staticStyle: { width: "40px", height: "40px" },
-                                attrs: {
-                                  src: "/storage/images/avatar/unvote.png"
-                                },
+                                attrs: { src: "/anh/unvote.png" },
                                 on: {
                                   click: function($event) {
                                     return _vm.unVote(cautraloi.id)
@@ -124467,8 +124463,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! F:\BKQA\BKQA\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! F:\BKQA\BKQA\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\BKQA\BKQA\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\BKQA\BKQA\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

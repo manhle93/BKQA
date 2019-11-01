@@ -82,7 +82,7 @@
             <el-tooltip class="item" effect="dark" content="Vote" placement="top">
               <a @click="vote(cautraloi.id)">
                 <img
-                  src="../storage/images/avatar/vote.png"
+                  src="/anh/vote.png"
                   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) == x)"
                   style="width: 40px; height: 40px"
                 />
@@ -92,7 +92,7 @@
             <el-tooltip class="item" effect="dark" content="Bỏ Vote" placement="top">
               <a>
                 <img
-                  src="/storage/images/avatar/unvote.png"
+                  src="/anh/unvote.png"
                   v-if="user_login !=null && (cautraloi.votes.find(x=>x.user_id == user_login.id) != x)"
                   @click="unVote(cautraloi.id)"
                   style="width: 40px; height: 40px"
