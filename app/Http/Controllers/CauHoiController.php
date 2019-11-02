@@ -76,8 +76,9 @@ class CauHoiController extends Controller
     }
     public function showFormAdd()
     {
+       $user = auth()->user();
         $chude = ChuDe::query()->get();
-        return view('nhapcauhoi', compact(['chude']));
+        return view('nhapcauhoi', compact(['chude', 'user']));
     }
     public function show($id)
     {
@@ -121,6 +122,7 @@ class CauHoiController extends Controller
         if ($user->quyen_id == 1 || $user->quyen_id == 2) {
             try {
                 $cauhoi = CauHoi::where('id', $id)->first();
+                $so_cau_hoi = ChuDe::where('id', $cauhoi->chu_de_id)->first();
                 $so_thong_bao = User::where('id', $cauhoi->user_id)->first();
                 CauHoi::find($id)->update([
                     'trang_thai' => true
@@ -133,6 +135,9 @@ class CauHoiController extends Controller
                     'cau_hoi_id' => $id,
                     'user_tra_loi_id'=> null,
                     'noi_dung' => 'Câu hỏi của bạn đã được phê duyệt'
+                ]);
+                ChuDe::where('id',$cauhoi->chu_de_id)->update([
+                    'so_cau_hoi' => $so_cau_hoi['so_cau_hoi'] + 1
                 ]);
                 response()->json([
                     'message' => 'Phê duyệt thành công',

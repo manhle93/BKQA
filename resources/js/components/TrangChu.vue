@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="banner">
-      <img src="https://1.bp.blogspot.com/-f9fU1gJGhA4/Xbvr8mk2y-I/AAAAAAAAADM/4N-MMwwLc74xGhi8GybIfRY063rOwAU1ACEwYBhgL/s1600/banner.png" width="100%" height="500px" />
+      <img
+        src="https://1.bp.blogspot.com/-f9fU1gJGhA4/Xbvr8mk2y-I/AAAAAAAAADM/4N-MMwwLc74xGhi8GybIfRY063rOwAU1ACEwYBhgL/s1600/banner.png"
+        width="100%"
+        height="500px"
+      />
       <!-- <img src="anh/project2.jpg" width="100%" height="500px" /> -->
     </div>
     <div class="container" style="font-family: 'Open Sans'">
@@ -39,7 +43,14 @@
             <P class="mini_title">CÂU HỎI MỚI CẬP NHẬT</P>
             <div class="bar"></div>
           </div>
-          <div v-for="cauhoi in cauhois">
+          <a href="nhapcauhoi">
+            <button
+              type="button"
+              style="font-size: 18px; font-weight:bold"
+              class="btn btn-outline-danger"
+            >ĐẶT CÂU HỎI</button>
+          </a>
+          <div v-for="cauhoi in cauhois" style="margin-top: 35px">
             <div class="row">
               <div class="col-md-1">
                 <img :src="cauhoi.user.anh_dai_dien" style="width: 80px; height:80px" />
@@ -49,10 +60,9 @@
                   <h4>{{cauhoi.tieu_de}}</h4>
                 </a>
                 <p>
-                  Tạo bởi: <a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a>
-                  <span
-                    style="margin-left: 20px"
-                  >Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
+                  Tạo bởi:
+                  <a :href="`../taikhoan/${cauhoi.user.id}`">{{cauhoi.user.name}}</a>
+                  <span style="margin-left: 20px">Chủ đề: {{cauhoi.chu_de.tieu_de}}</span>
                   <span style="margin-left: 20px">Thời gian: {{cauhoi.created_at}}</span>
                 </p>
                 <p>{{ cauhoi.noi_dung.substr(0, 200)}}...</p>
@@ -62,7 +72,7 @@
           </div>
           <div class="col-md-12" style="text-align:center">
             <a href="/tatcacauhoi">
-              <button type="button" class="btn btn-primary">Toàn bộ câu hỏi</button>             
+              <button type="button" class="btn btn-primary">Toàn bộ câu hỏi</button>
             </a>
           </div>
         </div>
@@ -85,11 +95,11 @@ export default {
   created() {
     this.fetchData();
   },
-  methods:{
-    fetchData(){
-      axios.get('cauhoimoi').then(res=>{
-        this.cauhois = res.data.data.data
-        console.log(this.cauhois)
+  methods: {
+    fetchData() {
+      axios.get("cauhoimoi").then(res => {
+        this.cauhois = res.data.data.data;
+        console.log(this.cauhois);
       });
     }
   }

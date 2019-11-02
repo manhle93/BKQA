@@ -4990,7 +4990,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___default.a);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["chudes"],
+  props: ["chudes", "user"],
   data: function data() {
     return {
       formCauHoi: {
@@ -5029,6 +5029,10 @@ Vue.component("multiselect", vue_multiselect__WEBPACK_IMPORTED_MODULE_0___defaul
   },
   created: function created() {
     this.chude = this.chudes;
+
+    if (this.user == null) {
+      return window.location.href = 'login';
+    }
   },
   methods: {
     submit: function submit(e) {
@@ -6191,6 +6195,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["chudes"],
   data: function data() {
@@ -6209,7 +6223,7 @@ __webpack_require__.r(__webpack_exports__);
     fetchData: function fetchData() {
       var _this = this;
 
-      axios.get('cauhoimoi').then(function (res) {
+      axios.get("cauhoimoi").then(function (res) {
         _this.cauhois = res.data.data.data;
         console.log(_this.cauhois);
       });
@@ -109708,8 +109722,10 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
               _vm._l(_vm.cauhois, function(cauhoi) {
-                return _c("div", [
+                return _c("div", { staticStyle: { "margin-top": "35px" } }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-1" }, [
                       _c("img", {
@@ -109724,7 +109740,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("p", [
-                        _vm._v("\n                Tạo bởi: "),
+                        _vm._v("\n                Tạo bởi:\n                "),
                         _c(
                           "a",
                           { attrs: { href: "../taikhoan/" + cauhoi.user.id } },
@@ -109750,7 +109766,7 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
-              _vm._m(2)
+              _vm._m(3)
             ],
             2
           )
@@ -109793,6 +109809,22 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { attrs: { href: "nhapcauhoi" } }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-outline-danger",
+          staticStyle: { "font-size": "18px", "font-weight": "bold" },
+          attrs: { type: "button" }
+        },
+        [_vm._v("ĐẶT CÂU HỎI")]
+      )
+    ])
   },
   function() {
     var _vm = this

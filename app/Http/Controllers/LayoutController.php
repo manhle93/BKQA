@@ -140,7 +140,7 @@ class LayoutController extends Controller
     public function getLichSuHoatDong()
     {
         $user = auth()->user();
-        $info = LichSuHoatDong::where('user_id', $user->id)->with('user')->get();
+        $info = LichSuHoatDong::where('user_id', $user->id)->with('user')->orderBy('created_at', 'desc')->get();
         return response()->json([
             'message' => 'Lấy lịch sử hoạt động thành công',
             'data' => $info,

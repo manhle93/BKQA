@@ -25,7 +25,7 @@ import Multiselect from "vue-multiselect";
 // register globally
 Vue.component("multiselect", Multiselect);
 export default {
-  props: ["chudes"],
+  props: ["chudes", "user"],
   data() {
     return {
       formCauHoi: {
@@ -64,6 +64,9 @@ export default {
   },
   created() {
     this.chude = this.chudes;
+    if(this.user == null){
+      return window.location.href='login'
+    }
   },
   methods: {
     submit(e) {
